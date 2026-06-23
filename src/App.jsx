@@ -7,6 +7,7 @@ import About from './pages/About.jsx';
 import Programs from './pages/Programs.jsx';
 import Schedule from './pages/Schedule.jsx';
 import Contact from './pages/Contact.jsx';
+import Calculator from './pages/Calculator.jsx';
 
 export default function App() {
   const [palette, setPaletteState] = React.useState(() => {
@@ -45,6 +46,7 @@ export default function App() {
   else if (page === 'programs') content = <Programs activeId={activeProgramId} setActiveId={setActiveProgramId} onEnquire={onEnquire} setPage={navigatePage} />;
   else if (page === 'schedule') content = <Schedule onEnquire={onEnquire} />;
   else if (page === 'contact') content = <Contact onEnquire={onEnquire} />;
+  else if (page === 'calculator') content = <Calculator onEnquire={onEnquire} setPage={navigatePage} />;
 
   return (
     <div className="site-shell">

@@ -59,6 +59,7 @@ export const Nav = ({ page, setPage, onEnquire }) => {
     { id: 'programs', label: 'Programs' },
     { id: 'schedule', label: 'Schedule' },
     { id: 'contact', label: 'Contact' },
+    { id: 'calculator', label: 'Calculate' },
   ];
 
   const go = (id) => {
