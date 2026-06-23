@@ -81,6 +81,7 @@ const ChipSelect = ({ options, value, onChange }) => (
         key={o.id}
         type="button"
         onClick={() => onChange(o.id)}
+        className="calc-chip"
         style={{
           padding: '10px 18px',
           border: '1px solid',

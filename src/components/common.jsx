@@ -83,8 +83,9 @@ export const Nav = ({ page, setPage, onEnquire }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '20px 40px',
-        gap: 24,
+        paddingTop: 16,
+        paddingBottom: 16,
+        gap: 16,
       }}>
         <a onClick={() => go('home')} style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
           <Logo size={36} />

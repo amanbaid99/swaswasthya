@@ -416,7 +416,7 @@ const Contact = ({ onEnquire }) => {
             gap: 56,
           }}>
             {/* Form */}
-            <div style={{
+            <div className="contact-form-card" style={{
               background: 'var(--cream-light)',
               border: '1px solid var(--rule)',
               borderRadius: 'var(--radius-lg)',

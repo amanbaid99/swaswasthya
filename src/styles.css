@@ -396,6 +396,9 @@ html { scroll-behavior: smooth; }
   color: var(--ink);
   outline: none;
   transition: border-color 0.2s;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 .field input:focus,
 .field textarea:focus,
@@ -413,11 +416,23 @@ html { scroll-behavior: smooth; }
   .container { padding: 0 22px; }
   .section { padding: 64px 0; }
   .section-sm { padding: 44px 0; }
+  /* Contact page: collapse 2-col layout, reduce card padding */
+  .contact-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .contact-form-card { padding: 28px !important; }
+  /* About page: collapse 2-col sections */
+  .about-founder-grid { grid-template-columns: 1fr !important; }
+  .about-values-grid { grid-template-columns: 1fr 1fr !important; }
 }
 @container site (max-width: 520px) {
   .container { padding: 0 18px; }
   .section { padding: 52px 0; }
   .btn { padding: 14px 22px; }
+  /* Contact: stack name+phone fields */
+  .contact-fields { grid-template-columns: 1fr !important; }
+  /* Calculator: full-width activity/goal chips */
+  .calc-chip { width: 100% !important; box-sizing: border-box !important; }
+  /* About values: single column */
+  .about-values-grid { grid-template-columns: 1fr !important; }
 }
 
 /* ───────── Mobile navigation drawer ───────── */
@@ -590,6 +605,10 @@ html { scroll-behavior: smooth; }
 }
 .ts-option[data-active="true"] .ts-check { opacity: 1; }
 
+@container site (max-width: 900px) {
+  .ts-label { display: none !important; }
+  .theme-switch-toggle { padding: 10px 12px !important; gap: 0 !important; }
+}
 @container site (max-width: 520px) {
   .theme-switch { right: 14px; bottom: 14px; }
   .theme-switch-panel { width: min(76vw, 230px); }
