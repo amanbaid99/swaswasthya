@@ -185,6 +185,63 @@ const MetricCard = ({ label, value, unit, sub, accent = false, bar }) => (
 );
 
 /* ── Main component ── */
+const VEG_SOURCES = [
+  { food: 'Soya chunks (dry)', amount: '52g', per: '100g', note: 'Highest plant protein' },
+  { food: 'Paneer', amount: '18g', per: '100g', note: 'Staple, easy to cook' },
+  { food: 'Chana / Chickpeas', amount: '19g', per: '100g dry', note: 'Chole, chaat, curries' },
+  { food: 'Moong dal', amount: '24g', per: '100g dry', note: 'Easiest to digest' },
+  { food: 'Rajma', amount: '9g', per: '100g cooked', note: 'Great with rice' },
+  { food: 'Peanuts', amount: '26g', per: '100g', note: 'Snack or chutney' },
+  { food: 'Hung curd / Greek yogurt', amount: '10g', per: '100g', note: 'Breakfast or raita' },
+  { food: 'Tofu', amount: '8g', per: '100g', note: 'Works like paneer' },
+  { food: 'Almonds', amount: '21g', per: '100g', note: 'Soaked or as milk' },
+  { food: 'Quinoa', amount: '14g', per: '100g dry', note: 'Complete amino profile' },
+];
+
+const NONVEG_SOURCES = [
+  { food: 'Chicken breast (cooked)', amount: '31g', per: '100g', note: 'Leanest meat choice' },
+  { food: 'Eggs (whole)', amount: '13g', per: '2 eggs', note: 'Most bioavailable protein' },
+  { food: 'Egg whites', amount: '11g', per: '100g', note: 'Zero fat option' },
+  { food: 'Rohu / Katla fish', amount: '17g', per: '100g', note: 'Common in Indian homes' },
+  { food: 'Tuna (canned)', amount: '25g', per: '100g', note: 'Quick, no cooking needed' },
+  { food: 'Prawns', amount: '24g', per: '100g', note: 'Low fat, high protein' },
+  { food: 'Mutton (lean)', amount: '26g', per: '100g', note: 'Rich in iron too' },
+];
+
+const PROTEIN_TIPS = [
+  { tip: 'Start your day with protein', detail: 'Eggs, hung curd with nuts, or moong chilla — a high-protein breakfast reduces cravings all day.' },
+  { tip: 'Add dal to every meal', detail: 'Even a small katori of dal adds 6–9g protein. Rotate moong, chana, masoor, and toor for variety.' },
+  { tip: 'Snack smarter', detail: 'Swap biscuits for a handful of roasted chana or peanuts — the same volume adds 10× more protein.' },
+  { tip: 'Make curd your ally', detail: 'Swap regular curd with Greek/hung curd (strain overnight). Same taste, 3× the protein.' },
+  { tip: 'Spread intake across meals', detail: 'Your body can only use ~30–40g of protein at once. Aim for 4 balanced meals rather than loading at dinner.' },
+];
+
+const ProteinSourceRow = ({ food, amount, per, note, accent }) => (
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: '1fr auto',
+    gap: 16,
+    padding: '12px 0',
+    borderBottom: '1px solid var(--rule)',
+    alignItems: 'center',
+  }}>
+    <div>
+      <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--ink)', marginBottom: 2 }}>{food}</div>
+      <div className="mono" style={{ fontSize: 10, letterSpacing: '0.1em', color: 'var(--ink-soft)', textTransform: 'uppercase' }}>{note}</div>
+    </div>
+    <div style={{ textAlign: 'right' }}>
+      <div style={{
+        fontFamily: 'var(--font-display)',
+        fontStyle: 'italic',
+        fontSize: 20,
+        color: accent || 'var(--green-deep)',
+        lineHeight: 1,
+      }}>{amount}</div>
+      <div className="mono" style={{ fontSize: 9, letterSpacing: '0.1em', color: 'var(--ink-soft)', textTransform: 'uppercase', marginTop: 2 }}>{per}</div>
+    </div>
+  </div>
+);
+
 const Calculator = ({ onEnquire, setPage }) => {
   const [form, setForm] = React.useState({
     gender: 'female',
@@ -197,6 +254,7 @@ const Calculator = ({ onEnquire, setPage }) => {
   });
   const [results, setResults] = React.useState(null);
   const resultsRef = React.useRef(null);
+  const proteinGuideRef = React.useRef(null);
 
   // Convert ft+in to cm
   const [heightFt, setHeightFt] = React.useState('');
@@ -621,12 +679,173 @@ const Calculator = ({ onEnquire, setPage }) => {
                       <span className="mono" style={{ fontSize: 12 }}>~{Math.round(results.protein.optimal / 4)} g</span>
                     </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => setTimeout(() => proteinGuideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)}
+                    style={{
+                      marginTop: 20,
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      color: 'var(--green-deep)',
+                      fontSize: 13,
+                      fontFamily: 'var(--font-body)',
+                      fontWeight: 500,
+                      textDecoration: 'underline',
+                      textUnderlineOffset: 3,
+                    }}
+                  >
+                    Best ways to meet your protein target →
+                  </button>
                 </div>
               </div>
 
               <style>{`
                 @container site (max-width: 900px) {
                   .results-grid { grid-template-columns: 1fr !important; }
+                }
+              `}</style>
+            </div>
+          </section>
+
+          {/* Protein Guide */}
+          <section ref={proteinGuideRef} style={{ padding: '80px 0', borderBottom: '1px solid var(--rule)', background: 'var(--cream)' }}>
+            <div className="container">
+              <SectionLabel num="✦">Protein Guide</SectionLabel>
+              <h2 className="display-2" style={{ marginBottom: 16, maxWidth: 760 }}>
+                How to hit <span className="italic" style={{ color: 'var(--clay)' }}>{results.protein.optimal}g</span> every day.
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--ink-soft)', lineHeight: 1.7, maxWidth: 620, marginBottom: 60 }}>
+                Meeting your protein target doesn't mean shakes and supplements. Here are the best sources available in most Indian kitchens — and a few habits that make it effortless.
+              </p>
+
+              {/* Tips strip */}
+              <div className="protein-tips-grid" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 20,
+                marginBottom: 64,
+              }}>
+                {PROTEIN_TIPS.map((t, i) => (
+                  <div key={i} style={{
+                    background: i === 0 ? 'var(--green-deep)' : 'var(--cream-light)',
+                    border: '1px solid var(--rule)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '28px 28px',
+                  }}>
+                    <div className="mono" style={{
+                      fontSize: 9,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: i === 0 ? 'var(--tan)' : 'var(--green-soft)',
+                      marginBottom: 10,
+                    }}>
+                      Tip {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div style={{
+                      fontFamily: 'var(--font-display)',
+                      fontStyle: 'italic',
+                      fontSize: 18,
+                      color: i === 0 ? 'var(--cream-light)' : 'var(--green-deep)',
+                      lineHeight: 1.3,
+                      marginBottom: 10,
+                    }}>
+                      {t.tip}
+                    </div>
+                    <p style={{
+                      fontSize: 13,
+                      lineHeight: 1.65,
+                      color: i === 0 ? 'rgba(240,229,207,0.75)' : 'var(--ink-soft)',
+                    }}>
+                      {t.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sources tables */}
+              <div className="protein-tables-grid" style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 40,
+                alignItems: 'start',
+              }}>
+                {/* Vegetarian */}
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: '50%',
+                      background: 'var(--green-soft)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <span style={{ fontSize: 16 }}>🌿</span>
+                    </div>
+                    <div>
+                      <h3 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)', lineHeight: 1 }}>
+                        Vegetarian sources
+                      </h3>
+                      <div className="mono" style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-soft)', marginTop: 4 }}>
+                        Common in Indian households
+                      </div>
+                    </div>
+                  </div>
+                  {VEG_SOURCES.map((s, i) => (
+                    <ProteinSourceRow key={i} {...s} accent="var(--green-deep)" />
+                  ))}
+                </div>
+
+                {/* Non-vegetarian */}
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: '50%',
+                      background: 'var(--clay)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <span style={{ fontSize: 16 }}>🍗</span>
+                    </div>
+                    <div>
+                      <h3 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)', lineHeight: 1 }}>
+                        Non-veg sources
+                      </h3>
+                      <div className="mono" style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-soft)', marginTop: 4 }}>
+                        Per 100g unless noted
+                      </div>
+                    </div>
+                  </div>
+                  {NONVEG_SOURCES.map((s, i) => (
+                    <ProteinSourceRow key={i} {...s} accent="var(--clay)" />
+                  ))}
+                </div>
+              </div>
+
+              <div className="mono" style={{
+                fontSize: 10,
+                letterSpacing: '0.12em',
+                color: 'var(--ink-soft)',
+                lineHeight: 1.8,
+                maxWidth: 720,
+                textTransform: 'uppercase',
+                borderTop: '1px solid var(--rule)',
+                paddingTop: 24,
+                marginTop: 48,
+              }}>
+                ✦ Protein values are approximate and may vary by brand, cooking method, and source. Numbers sourced from ICMR–NIN Indian food composition tables.
+              </div>
+
+              <style>{`
+                @container site (max-width: 900px) {
+                  .protein-tips-grid { grid-template-columns: repeat(2, 1fr) !important; }
+                }
+                @container site (max-width: 640px) {
+                  .protein-tips-grid { grid-template-columns: 1fr !important; }
+                  .protein-tables-grid { grid-template-columns: 1fr !important; }
                 }
               `}</style>
             </div>
