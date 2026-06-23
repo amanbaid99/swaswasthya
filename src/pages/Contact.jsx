@@ -1,6 +1,7 @@
 import React from 'react';
 import { PROGRAMS } from '../data/programs.js';
 import { ImgPh, SectionLabel } from '../components/common.jsx';
+import { sendEnquiry } from '../lib/email.js';
 
 const ContactCard = ({ label, title, sub, cta, href, dark }) => (
   <a
@@ -154,13 +155,30 @@ export const EnquiryModal = ({ open, onClose, initialProgram }) => {
     message: '',
   });
 
+  const [sending, setSending] = React.useState(false);
+
   React.useEffect(() => {
-    if (open) setStep(1);
+    if (open) { setStep(1); setSending(false); }
   }, [open]);
 
   if (!open) return null;
 
-  const submit = () => setStep(3);
+  const submit = async () => {
+    setSending(true);
+    await sendEnquiry({
+      source: 'Enquiry Modal',
+      from_name: form.name,
+      from_email: form.email,
+      phone: form.phone || '—',
+      interest: form.program,
+      mode: form.mode,
+      when: form.when,
+      message: form.message || '—',
+      reply_to: form.email,
+    });
+    setSending(false);
+    setStep(3);
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -318,11 +336,11 @@ export const EnquiryModal = ({ open, onClose, initialProgram }) => {
               </div>
 
               <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                <button onClick={() => setStep(1)} className="btn btn-ghost">
+                <button onClick={() => setStep(1)} className="btn btn-ghost" disabled={sending}>
                   ← Back
                 </button>
-                <button onClick={submit} className="btn btn-primary" style={{ flex: 1 }}>
-                  Send enquiry
+                <button onClick={submit} className="btn btn-primary" style={{ flex: 1, opacity: sending ? 0.7 : 1 }} disabled={sending}>
+                  {sending ? 'Sending…' : 'Send enquiry'}
                 </button>
               </div>
             </div>
@@ -373,9 +391,21 @@ const Contact = ({ onEnquire }) => {
     message: '',
   });
   const [submitted, setSubmitted] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+    setSending(true);
+    await sendEnquiry({
+      source: 'Contact Page',
+      from_name: form.name,
+      from_email: form.email,
+      phone: form.phone || '—',
+      interest: form.interest,
+      message: form.message || '—',
+      reply_to: form.email,
+    });
+    setSending(false);
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -524,8 +554,8 @@ const Contact = ({ onEnquire }) => {
                     <span className="mono" style={{ fontSize: 11, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>
                       We respond within 24 hrs
                     </span>
-                    <button type="submit" className="btn btn-primary">
-                      Send enquiry →
+                    <button type="submit" className="btn btn-primary" disabled={sending} style={{ opacity: sending ? 0.7 : 1 }}>
+                      {sending ? 'Sending…' : 'Send enquiry →'}
                     </button>
                   </div>
                 </form>
