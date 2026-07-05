@@ -27,19 +27,9 @@ const HomeHero = ({ onEnquire, setPage }) => (
           textTransform: 'uppercase',
           color: 'var(--ink-soft)',
           marginTop: 14,
-          marginBottom: 6,
-        }}>
-          Balanced Fitness · Mind &amp; Body
-        </div>
-        <div style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 11,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: 'var(--clay)',
           marginBottom: 16,
         }}>
-          Est. 2007
+          Balanced Fitness · Mind &amp; Body · Est. 2007
         </div>
         <span className="eyebrow">For the woman you were, are, and are becoming</span>
       </div>
