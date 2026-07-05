@@ -182,9 +182,9 @@ const HomeStory = ({ setPage }) => (
           gridTemplateColumns: '1fr 1fr',
           gap: 16,
         }}>
-          <img src="/images/session-early.jpg" alt="Early days — 2007" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center', borderRadius: 'var(--radius-md)', display: 'block' }} />
-          <img src="/images/Practice_now.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40 }} />
-          <img src="/images/community-group.jpg" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 'span 2', marginTop: -20 }} />
+          <ImgPh label="early days — 2007" height={280} radius="var(--radius-md)" />
+          <img src="/images/Practicenow.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40 }} />
+          <ImgPh label="community group session" height={200} radius="var(--radius-md)" style={{ gridColumn: 'span 2', marginTop: -20 }} />
         </div>
       </div>
     </div>
