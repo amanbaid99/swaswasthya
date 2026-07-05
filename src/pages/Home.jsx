@@ -69,45 +69,31 @@ const HomeHero = ({ onEnquire, setPage }) => (
         </p>
       </div>
 
-      {/* Stats + CTAs row */}
+      {/* Programs info + CTAs row */}
       <div className="hero-bottom" style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1.4fr 1fr',
+        gridTemplateColumns: '1.6fr 1fr',
         gap: 20,
         alignItems: 'stretch',
       }}>
 
-        {/* 400+ community card */}
-        <div style={{
-          padding: '24px 26px',
-          background: 'var(--green-deep)',
-          color: 'var(--cream)',
-          borderRadius: 'var(--radius-md)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-        }}>
-          <div className="mono" style={{ color: 'var(--tan)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10 }}>
-            The community
-          </div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 1, color: 'var(--cream-light)' }}>
-            400+
-          </div>
-          <div style={{ fontSize: 13, opacity: 0.7 }}>women across ages, on the path</div>
-        </div>
-
         {/* 6 programs card */}
         <div style={{
-          padding: '24px 26px',
+          padding: '28px 32px',
           border: '1px solid var(--rule)',
           borderRadius: 'var(--radius-md)',
           background: 'var(--cream-light)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}>
-          <div className="mono" style={{ color: 'var(--green-soft)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, marginBottom: 8 }}>
-            6 programs
-          </div>
-          <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 14 }}>
-            From everyday strength to face yog & prenatal care
+          <div>
+            <div className="mono" style={{ color: 'var(--green-soft)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, marginBottom: 10 }}>
+              6 programs · 400+ women
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 26, color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 14 }}>
+              From everyday strength to face yog & prenatal care
+            </div>
           </div>
           <button
             onClick={() => setPage('programs')}
@@ -121,6 +107,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
               textTransform: 'uppercase',
               cursor: 'pointer',
               padding: 0,
+              alignSelf: 'flex-start',
             }}
           >
             See all programs →
@@ -141,7 +128,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
     </div>
 
     <style>{`
-      @container site (max-width: 760px) {
+      @container site (max-width: 640px) {
         .hero-bottom { grid-template-columns: 1fr !important; }
       }
     `}</style>
@@ -195,9 +182,9 @@ const HomeStory = ({ setPage }) => (
           gridTemplateColumns: '1fr 1fr',
           gap: 16,
         }}>
-          <ImgPh label="early days · 2007" height={280} radius="var(--radius-md)" />
-          <ImgPh label="practice · today" height={280} radius="var(--radius-md)" style={{ marginTop: 40 }} />
-          <ImgPh label="community · group session" height={200} radius="var(--radius-md)" style={{ gridColumn: 'span 2', marginTop: -20 }} />
+          <img src="/images/session-early.jpg" alt="Early days — 2007" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center', borderRadius: 'var(--radius-md)', display: 'block' }} />
+          <img src="/images/session-strength.jpg" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40 }} />
+          <img src="/images/community-group.jpg" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 'span 2', marginTop: -20 }} />
         </div>
       </div>
     </div>
@@ -224,7 +211,10 @@ const ProgramCard = ({ p, onClick }) => (
     }}
   >
     <div style={{ position: 'relative', overflow: 'hidden' }}>
-      <ImgPh label={p.imagery} height={220} radius="0" style={{ background: p.bg }} />
+      {p.image
+        ? <img src={p.image} alt={p.name} style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+        : <ImgPh label={p.imagery} height={220} radius="0" style={{ background: p.bg }} />
+      }
       <span style={{
         position: 'absolute',
         top: 14,

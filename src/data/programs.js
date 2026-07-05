@@ -8,6 +8,7 @@ export const PROGRAMS = [
     short: 'Strength + weight training to reduce fat, sculpt lean muscle, balance hormones, boost metabolism.',
     color: 'var(--green-deep)',
     bg: 'var(--cream-deep)',
+    image: '/images/session-mobility.jpg',
     schedule: 'Mon–Fri',
     timings: ['7:00 — 8:00 am', '10:15 — 11:15 am', '6:15 — 7:15 pm'],
     duration: '60 mins',
