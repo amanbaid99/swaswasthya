@@ -401,122 +401,63 @@ const HomeSchedulePreview = ({ setPage }) => (
   </section>
 );
 
-const HomeTestimonials = () => {
-  const quotes = [
-    {
-      q: 'Tanvi changed the way I think about my body. After eighteen years of trying everything, this is the only practice that has lasted.',
-      who: 'Reshma · with Swa-Swasthya since 2019',
-    },
-    {
-      q: 'It feels less like a workout and more like coming back to myself. The community of women here is what kept me showing up.',
-      who: 'Kavita · Swa-Shakti group batch',
-    },
-    {
-      q: 'The prenatal program made my third trimester something I actually looked forward to. Calm, safe, and so well-paced.',
-      who: 'Neha · Swa-Antara',
-    },
-  ];
-  const [idx, setIdx] = React.useState(0);
+const TESTIMONIALS = [
+  {
+    q: `I started it with my doctor's permission in about 3.5 months. I started realising its benefits gradually after a couple of months — even in the later months, I didn't have back ache or swollen feet, touchwood.\n\nIt has really helped me remain active throughout the pregnancy. I am especially surprised because I did not regularly exercise before I joined prenatal yoga and was not sure initially if I could manage. But thankfully, all went well and I am continuing it for the past 5 months till date and on!\n\nTanvi madam's overall personality is a great positive driving force. She takes the classes at each individual's comfortable pace and slowly increases and adds new necessary exercises. Even in online classes, madam has a close eye for details due to her experience — she gives personalised attention to every student.\n\nFor someone like me who did not like exercise or yoga before, I have surprisingly developed a liking for yoga too!`,
+    who: 'Swa-Antara · Prenatal Wellness',
+  },
+];
 
-  React.useEffect(() => {
-    const timer = setInterval(() => setIdx(i => (i + 1) % quotes.length), 7000);
-    return () => clearInterval(timer);
-  }, []);
+const HomeTestimonials = () => (
+  <section className="section" style={{ background: 'var(--cream-light)', borderBlock: '1px solid var(--rule)' }}>
+    <div className="container">
+      <SectionLabel num="04">From the community</SectionLabel>
+      <h2 className="display-2" style={{ marginBottom: 48, maxWidth: 600 }}>
+        In their <span className="italic" style={{ color: 'var(--clay)' }}>own words</span>.
+      </h2>
 
-  return (
-    <section className="section">
-      <div className="container">
-        <SectionLabel num="04">From the community</SectionLabel>
-        <div style={{
-          background: 'var(--cream-light)',
-          border: '1px solid var(--rule)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '64px 72px',
-          position: 'relative',
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: 24,
-            left: 32,
-            fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
-            fontSize: 120,
-            lineHeight: 1,
-            color: 'var(--blush)',
-            opacity: 0.7,
+      <div className="testimonials-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+        gap: 24,
+      }}>
+        {TESTIMONIALS.map((t, i) => (
+          <div key={i} style={{
+            background: 'var(--cream)',
+            border: '1px solid var(--rule)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '40px 36px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+            position: 'relative',
           }}>
-            "
-          </div>
-
-          <div style={{ position: 'relative', minHeight: 200 }}>
-            <p style={{
+            <div style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
-              fontSize: 'clamp(20px, 2.6cqw, 36px)',
-              lineHeight: 1.35,
-              color: 'var(--green-deep)',
-              marginBottom: 32,
-              maxWidth: 880,
-            }}>
-              {quotes[idx].q}
-            </p>
-            <div className="mono" style={{
-              fontSize: 11,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--ink-soft)',
-            }}>
-              — {quotes[idx].who}
-            </div>
-          </div>
-
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 40,
-            paddingTop: 24,
-            borderTop: '1px solid var(--rule)',
-          }}>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {quotes.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIdx(i)}
-                  style={{
-                    width: i === idx ? 24 : 8,
-                    height: 8,
-                    borderRadius: 100,
-                    background: i === idx ? 'var(--green-deep)' : 'var(--rule)',
-                    border: 'none',
-                    transition: 'all 0.25s ease',
-                    padding: 0,
-                  }}
-                />
+              fontSize: 64,
+              lineHeight: 0.8,
+              color: 'var(--clay)',
+              opacity: 0.5,
+            }}>"</div>
+            <div style={{ flex: 1 }}>
+              {t.q.split('\n\n').map((para, j) => (
+                <p key={j} style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: j < t.q.split('\n\n').length - 1 ? 14 : 0 }}>
+                  {para}
+                </p>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <button
-                onClick={() => setIdx((idx - 1 + quotes.length) % quotes.length)}
-                className="btn btn-ghost btn-sm"
-                style={{ padding: '8px 14px' }}
-              >
-                ← Prev
-              </button>
-              <button
-                onClick={() => setIdx((idx + 1) % quotes.length)}
-                className="btn btn-ghost btn-sm"
-                style={{ padding: '8px 14px' }}
-              >
-                Next →
-              </button>
+            <div style={{ borderTop: '1px solid var(--rule)', paddingTop: 16 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-soft)' }}>
+                {t.who}
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 const HomePress = () => (
   <section className="section-sm" style={{ borderBlock: '1px solid var(--rule)' }}>
