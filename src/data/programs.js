@@ -161,6 +161,7 @@ export const PROGRAMS = [
     ],
     equipment: ['Dumbbells (light)', 'Resistance bands', 'Bricks, towels, props', 'Yoga mat'],
     pricing: 'On enquiry',
+    image: '/images/prental_edit.jpg',
     imagery: 'expecting mother · gentle movement',
   },
   {
@@ -193,6 +194,7 @@ export const PROGRAMS = [
     ],
     equipment: ['Provided in onboarding pack'],
     pricing: 'Capsule pricing · dates soon',
+    image: '/images/body_transformation_edit.png',
     imagery: 'transformation montage · before / during / after',
   },
 ];
