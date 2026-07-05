@@ -37,7 +37,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
           textAlign: 'center',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
-          letterSpacing: '0.24em',
+          letterSpacing: '0.18em',
           textTransform: 'uppercase',
           color: 'var(--ink-soft)',
           marginTop: -4,
@@ -190,10 +190,10 @@ const HomeStory = ({ setPage }) => (
           <h2 className="display-2" style={{ marginBottom: 28 }}>
             Started in a small room with <span className="italic" style={{ color: 'var(--clay)' }}>just four women</span>.
           </h2>
-          <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 20, maxWidth: 540 }}>
+          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 20, maxWidth: 540 }}>
             Eighteen years ago, what began as a way to use time productively quietly grew into a practice — and then into a community of women of all ages working towards health and wellness.
           </p>
-          <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 32, maxWidth: 540 }}>
+          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 32, maxWidth: 540 }}>
             The journey has been long and filled with new ideas, techniques, teaching and continuous learning. Onwards and upwards.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -245,7 +245,7 @@ const ProgramCard = ({ p, onClick }) => (
         left: 14,
         fontFamily: 'var(--font-mono)',
         fontSize: 11,
-        letterSpacing: '0.16em',
+        letterSpacing: '0.14em',
         color: 'var(--green-deep)',
       }}>
         {p.num} / 06
@@ -262,7 +262,7 @@ const ProgramCard = ({ p, onClick }) => (
     </div>
     <div style={{ padding: '24px 24px 28px', display: 'flex', flexDirection: 'column', flex: 1 }}>
       <div className="eyebrow" style={{ marginBottom: 8 }}>{p.sub}</div>
-      <h3 className="display-3" style={{ marginBottom: 12, fontSize: 28 }}>
+      <h3 className="display-3" style={{ marginBottom: 12 }}>
         {p.name}
       </h3>
       <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)', marginBottom: 20, flex: 1 }}>
@@ -344,7 +344,7 @@ const HomeSchedulePreview = ({ setPage }) => (
           <h2 className="display-2" style={{ marginBottom: 24 }}>
             A rhythm <span className="italic" style={{ color: 'var(--clay)' }}>that holds</span>.
           </h2>
-          <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 28 }}>
+          <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 28 }}>
             Group sessions run Mon–Fri at three reliable times. Personal training is fully customisable to your day.
           </p>
           <button className="btn btn-primary" onClick={() => setPage('schedule')}>
@@ -367,7 +367,7 @@ const HomeSchedulePreview = ({ setPage }) => (
             borderBottom: '1px solid rgba(240, 229, 207, 0.18)',
           }}>
             <div>
-              <div className="mono" style={{ color: 'var(--tan)', letterSpacing: '0.16em', textTransform: 'uppercase', fontSize: 10 }}>
+              <div className="mono" style={{ color: 'var(--tan)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10 }}>
                 Group · Swa-Shakti
               </div>
               <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 28, color: 'var(--cream-light)', marginTop: 4 }}>
@@ -456,7 +456,7 @@ const HomeTransformations = () => (
                 <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--green-deep)' }}>
                   {t.name}, {t.age}
                 </div>
-                <span className="mono" style={{ fontSize: 10, color: 'var(--clay)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                <span className="mono" style={{ fontSize: 10, color: 'var(--clay)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
                   {t.time}
                 </span>
               </div>
@@ -533,7 +533,7 @@ const HomeTestimonials = () => {
             </p>
             <div className="mono" style={{
               fontSize: 11,
-              letterSpacing: '0.16em',
+              letterSpacing: '0.14em',
               textTransform: 'uppercase',
               color: 'var(--ink-soft)',
             }}>

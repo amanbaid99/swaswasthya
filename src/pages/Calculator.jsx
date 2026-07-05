@@ -105,7 +105,7 @@ const ChipSelect = ({ options, value, onChange }) => (
           <span style={{
             fontSize: 10,
             fontFamily: 'var(--font-mono)',
-            letterSpacing: '0.08em',
+            letterSpacing: '0.12em',
             opacity: 0.75,
             textTransform: 'uppercase',
           }}>
@@ -149,7 +149,7 @@ const MetricCard = ({ label, value, unit, sub, accent = false, bar }) => (
         <div className="mono" style={{
           fontSize: 14,
           color: accent ? 'var(--tan)' : 'var(--ink-soft)',
-          letterSpacing: '0.08em',
+          letterSpacing: '0.12em',
         }}>
           {unit}
         </div>
@@ -228,7 +228,7 @@ const ProteinSourceRow = ({ food, amount, per, note, accent }) => (
   }}>
     <div>
       <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--ink)', marginBottom: 2 }}>{food}</div>
-      <div className="mono" style={{ fontSize: 10, letterSpacing: '0.1em', color: 'var(--ink-soft)', textTransform: 'uppercase' }}>{note}</div>
+      <div className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)', textTransform: 'uppercase' }}>{note}</div>
     </div>
     <div style={{ textAlign: 'right' }}>
       <div style={{
@@ -238,7 +238,7 @@ const ProteinSourceRow = ({ food, amount, per, note, accent }) => (
         color: accent || 'var(--green-deep)',
         lineHeight: 1,
       }}>{amount}</div>
-      <div className="mono" style={{ fontSize: 9, letterSpacing: '0.1em', color: 'var(--ink-soft)', textTransform: 'uppercase', marginTop: 2 }}>{per}</div>
+      <div className="mono" style={{ fontSize: 9, letterSpacing: '0.12em', color: 'var(--ink-soft)', textTransform: 'uppercase', marginTop: 2 }}>{per}</div>
     </div>
   </div>
 );
@@ -331,10 +331,10 @@ const Calculator = ({ onEnquire, setPage }) => {
             Know your <span style={{ color: 'var(--clay)' }}>numbers</span>.
           </h1>
           <p style={{
-            fontSize: 17,
+            fontSize: 18,
             color: 'var(--ink-soft)',
             maxWidth: 580,
-            lineHeight: 1.6,
+            lineHeight: 1.65,
             marginTop: 24,
           }}>
             Your daily calorie target, ideal BMI range, and protein needs — personalised to your body, age, and goals. Takes 30 seconds.

@@ -87,7 +87,7 @@ const SessionChip = ({ s, onClick }) => {
       <div className="mono" style={{
         fontSize: 9,
         color: 'var(--ink-soft)',
-        letterSpacing: '0.08em',
+        letterSpacing: '0.12em',
       }}>
         {s.dur}min · {s.mode.includes('Online') ? 'on+off' : 'off'}
       </div>
@@ -134,7 +134,7 @@ const WeekGrid = ({ filtered, onEnquire }) => (
           padding: '20px 16px',
           fontFamily: 'var(--font-mono)',
           fontSize: 10,
-          letterSpacing: '0.16em',
+          letterSpacing: '0.14em',
           textTransform: 'uppercase',
           color: 'var(--green-soft)',
           borderBottom: '1px solid var(--rule)',
@@ -292,10 +292,10 @@ const Schedule = ({ onEnquire }) => {
             Pick a time that <span style={{ color: 'var(--clay)' }}>holds you</span>.
           </h1>
           <p style={{
-            fontSize: 17,
+            fontSize: 18,
             color: 'var(--ink-soft)',
             maxWidth: 600,
-            lineHeight: 1.6,
+            lineHeight: 1.65,
             marginTop: 24,
           }}>
             Group sessions run Mon–Fri. Personal training and the smaller practices have customisable timings — book a slot that works for you.
@@ -417,7 +417,7 @@ const Schedule = ({ onEnquire }) => {
             gap: 16,
           }}>
             <div>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--green-soft)', marginBottom: 6 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-soft)', marginBottom: 6 }}>
                 For offline sessions
               </div>
               <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)' }}>

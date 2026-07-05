@@ -424,7 +424,6 @@ export const HomeFinalCTA = ({ onEnquire }) => (
         fontStyle: 'italic',
         margin: '24px auto 32px',
         maxWidth: 1100,
-        fontSize: 'clamp(40px, 8cqw, 128px)',
       }}>
         Its <span style={{ color: 'var(--blush)' }}>you</span>, its <span style={{ color: 'var(--blush)' }}>me</span>, its <span style={{ color: 'var(--blush)' }}>us</span>.
       </h2>

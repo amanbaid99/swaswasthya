@@ -7,7 +7,7 @@ const Meta = ({ label, value }) => (
     <span className="mono" style={{ fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-soft)' }}>
       {label}
     </span>
-    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 17, color: 'var(--green-deep)' }}>
+    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 18, color: 'var(--green-deep)' }}>
       {value}
     </span>
   </div>
@@ -164,7 +164,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
               padding: '0 24px',
               borderLeft: i > 0 ? '1px solid var(--rule)' : 'none',
             }}>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--green-soft)', marginBottom: 6 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--green-soft)', marginBottom: 6 }}>
                 {k}
               </div>
               <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--green-deep)', lineHeight: 1.2 }}>
@@ -192,7 +192,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
         }}>
           <div>
             <SectionLabel num="01">Targeted for</SectionLabel>
-            <h2 className="display-2" style={{ marginBottom: 32, fontSize: 'clamp(28px, 4.5cqw, 64px)' }}>
+            <h2 className="display-2" style={{ marginBottom: 32 }}>
               What this practice <span className="italic" style={{ color: 'var(--clay)' }}>moves</span>.
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -225,7 +225,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
               padding: '40px',
               marginBottom: 24,
             }}>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--tan)', textTransform: 'uppercase', marginBottom: 16 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', color: 'var(--tan)', textTransform: 'uppercase', marginBottom: 16 }}>
                 The way it flows
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -235,8 +235,8 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
                     gap: 16,
                     padding: '14px 0',
                     borderBottom: i < p.flow.length - 1 ? '1px solid rgba(240, 229, 207, 0.18)' : 'none',
-                    fontSize: 15,
-                    lineHeight: 1.5,
+                    fontSize: 16,
+                    lineHeight: 1.65,
                   }}>
                     <span style={{ color: 'var(--blush)' }}>✦</span>
                     <span style={{ color: 'rgba(240, 229, 207, 0.9)' }}>{f}</span>
@@ -251,7 +251,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
               borderRadius: 'var(--radius-md)',
               padding: 28,
             }}>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--green-soft)', textTransform: 'uppercase', marginBottom: 14 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', color: 'var(--green-soft)', textTransform: 'uppercase', marginBottom: 14 }}>
                 What you'll need
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -328,7 +328,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
             }}>
               {p.pricing}
             </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'rgba(240, 229, 207, 0.75)', marginBottom: 28, maxWidth: 440 }}>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'rgba(240, 229, 207, 0.75)', marginBottom: 28, maxWidth: 440 }}>
               Pricing varies by frequency, format and personalisation. Send us an enquiry and we'll send back a detailed plan within 24 hours.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -355,7 +355,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
               borderRadius: 'var(--radius-lg)',
               marginBottom: 16,
             }}>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--tan)', textTransform: 'uppercase', marginBottom: 12 }}>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', color: 'var(--tan)', textTransform: 'uppercase', marginBottom: 12 }}>
                 What's included
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -366,7 +366,7 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
                   'WhatsApp support between sessions',
                   'Monthly progress check-in',
                 ].map((x) => (
-                  <li key={x} style={{ display: 'flex', gap: 12, fontSize: 15, color: 'rgba(240, 229, 207, 0.9)' }}>
+                  <li key={x} style={{ display: 'flex', gap: 12, fontSize: 16, color: 'rgba(240, 229, 207, 0.9)' }}>
                     <span style={{ color: 'var(--blush)' }}>✓</span>
                     <span>{x}</span>
                   </li>
@@ -432,7 +432,7 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
             flexWrap: 'wrap',
             gap: 24,
           }}>
-            <p style={{ fontSize: 17, lineHeight: 1.6, color: 'var(--ink-soft)', maxWidth: 480 }}>
+            <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', maxWidth: 480 }}>
               Six programs. One integrated practice. Pick the one that meets you where you are — or build a combination with us.
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -494,7 +494,7 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
                       textAlign: 'left',
                       fontFamily: 'var(--font-mono)',
                       fontSize: 10,
-                      letterSpacing: '0.16em',
+                      letterSpacing: '0.14em',
                       textTransform: 'uppercase',
                       color: 'var(--green-soft)',
                       fontWeight: 500,
@@ -511,7 +511,7 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
                       <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 20, color: 'var(--green-deep)' }}>
                         {p.name}
                       </div>
-                      <div className="mono" style={{ fontSize: 10, color: 'var(--ink-soft)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 4 }}>
+                      <div className="mono" style={{ fontSize: 10, color: 'var(--ink-soft)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: 4 }}>
                         {p.num} · {p.sub}
                       </div>
                     </td>

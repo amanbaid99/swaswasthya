@@ -26,7 +26,7 @@ const ContactCard = ({ label, title, sub, cta, href, dark }) => (
   >
     <div className="mono" style={{
       fontSize: 10,
-      letterSpacing: '0.16em',
+      letterSpacing: '0.14em',
       textTransform: 'uppercase',
       color: dark ? 'var(--tan)' : 'var(--green-soft)',
       marginBottom: 8,
@@ -53,7 +53,7 @@ const ContactCard = ({ label, title, sub, cta, href, dark }) => (
     </div>
     <div className="mono" style={{
       fontSize: 11,
-      letterSpacing: '0.16em',
+      letterSpacing: '0.14em',
       textTransform: 'uppercase',
       color: dark ? 'var(--blush)' : 'var(--clay)',
     }}>
@@ -127,8 +127,8 @@ const FAQList = () => {
             {isOpen && (
               <div style={{
                 paddingBottom: 24,
-                fontSize: 15,
-                lineHeight: 1.7,
+                fontSize: 16,
+                lineHeight: 1.65,
                 color: 'var(--ink-soft)',
                 maxWidth: 620,
                 animation: 'fadein 0.25s ease',
@@ -427,10 +427,10 @@ const Contact = ({ onEnquire }) => {
             Let's start a <span style={{ color: 'var(--clay)' }}>conversation</span>.
           </h1>
           <p style={{
-            fontSize: 17,
+            fontSize: 18,
             color: 'var(--ink-soft)',
             maxWidth: 600,
-            lineHeight: 1.6,
+            lineHeight: 1.65,
             marginTop: 24,
           }}>
             Tell us what you're looking for. We'll send back a thoughtful plan within 24 hours — and the first 20-minute intro call is always free.

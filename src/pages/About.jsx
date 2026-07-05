@@ -57,13 +57,13 @@ const About = ({ setPage, onEnquire }) => (
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <p style={{ fontSize: 19, lineHeight: 1.65, color: 'var(--green-deep)', fontFamily: 'var(--font-display)', fontStyle: 'italic' }}>
+            <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--green-deep)', fontFamily: 'var(--font-display)', fontStyle: 'italic' }}>
               And by finding and practicing the right balance between the physical and mental wellbeing, we are able to be closer to becoming our best self.
             </p>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)' }}>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)' }}>
               The practice is not about chasing a body. It's about meeting yourself — body, breath, and mind — and building a relationship with strength that will outlast trends, seasons, and decades.
             </p>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)' }}>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)' }}>
               That belief shapes every program we build. Strength training that respects hormones. Breathwork that calms the nervous system. Prenatal care that supports a woman through every trimester. Face yog that brings circulation back to the surface. All of it, integrated. All of it, sustainable.
             </p>
           </div>
@@ -131,7 +131,7 @@ const About = ({ setPage, onEnquire }) => (
               }}>
                 {s.title}
               </h3>
-              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--ink-soft)', maxWidth: 620 }}>
+              <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', maxWidth: 620 }}>
                 {s.body}
               </p>
             </div>
@@ -159,10 +159,10 @@ const About = ({ setPage, onEnquire }) => (
             <h2 className="display-2" style={{ marginBottom: 28 }}>
               The teacher behind <span className="italic" style={{ color: 'var(--clay)' }}>the practice</span>.
             </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 18 }}>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 18 }}>
               Eighteen years of teaching. Hundreds of women coached. Tanvi blends strength training, mobility, yoga, breathwork, and lifestyle coaching into a single practice that respects how a woman's body changes through her life.
             </p>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)', marginBottom: 28 }}>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 28 }}>
               Trained across modalities. Certified in pre & postnatal fitness. A continuous learner — always returning to the mat as a student first.
             </p>
 
@@ -244,7 +244,7 @@ const About = ({ setPage, onEnquire }) => (
               }}>
                 {t}
               </h3>
-              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(240, 229, 207, 0.78)', maxWidth: 440 }}>
+              <p style={{ fontSize: 16, lineHeight: 1.65, color: 'rgba(240, 229, 207, 0.78)', maxWidth: 440 }}>
                 {b}
               </p>
             </div>
