@@ -38,11 +38,12 @@ const HomeHero = ({ onEnquire, setPage }) => (
       <img
         src="/images/founder.jpg"
         alt="Tanvi — founder of Swa-Swasthya"
+        className="hero-img"
         style={{
           width: '100%',
-          height: 580,
+          height: 520,
           objectFit: 'cover',
-          objectPosition: 'center top',
+          objectPosition: 'center 65%',
           borderRadius: 'var(--radius-lg)',
           display: 'block',
           marginBottom: 28,
@@ -60,10 +61,9 @@ const HomeHero = ({ onEnquire, setPage }) => (
         <p style={{
           fontFamily: 'var(--font-display)',
           fontStyle: 'italic',
-          fontSize: 'clamp(16px, 2cqw, 24px)',
-          lineHeight: 1.3,
+          fontSize: 'clamp(15px, 2cqw, 24px)',
+          lineHeight: 1.4,
           color: 'var(--green-deep)',
-          whiteSpace: 'nowrap',
         }}>
           "swa is self and swasthya is health — finding the right balance is how we become our best self."
         </p>
@@ -130,6 +130,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
     <style>{`
       @container site (max-width: 640px) {
         .hero-bottom { grid-template-columns: 1fr !important; }
+        .hero-img { height: 320px !important; }
       }
     `}</style>
   </section>
@@ -177,13 +178,15 @@ const HomeStory = ({ setPage }) => (
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto', gap: 12 }}>
-          {/* Left col */}
-          <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 300, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
-          <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
-          {/* Right col — offset down via paddingTop on the column */}
-          <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 2, gridRow: 1, alignSelf: 'end', imageOrientation: 'from-image' }} />
-          <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 300, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 2, gridRow: 2, imageOrientation: 'from-image' }} />
+        <div style={{ display: 'flex', gap: 12 }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          </div>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 48 }}>
+            <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          </div>
         </div>
       </div>
     </div>
