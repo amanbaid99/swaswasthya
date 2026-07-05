@@ -177,15 +177,13 @@ const HomeStory = ({ setPage }) => (
           </div>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 12,
-        }}>
-          <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
-          <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40, imageOrientation: 'from-image' }} />
-          <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
-          <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', marginTop: -40, imageOrientation: 'from-image' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto', gap: 12 }}>
+          {/* Left col */}
+          <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 300, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          {/* Right col — offset down via paddingTop on the column */}
+          <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 2, gridRow: 1, alignSelf: 'end', imageOrientation: 'from-image' }} />
+          <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 300, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', gridColumn: 2, gridRow: 2, imageOrientation: 'from-image' }} />
         </div>
       </div>
     </div>
