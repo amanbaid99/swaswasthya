@@ -64,6 +64,7 @@ export const PROGRAMS = [
     equipment: ['Dumbbells', 'Resistance bands', 'Bricks, towels, props', 'Yoga mat', 'Own body weight'],
     pricing: '₹ 15,000 / month',
     image: '/images/personal_training.jpg',
+    imageRotate: -90,
     imagery: 'tanvi correcting form · 1:1 setting',
   },
   {
@@ -97,6 +98,7 @@ export const PROGRAMS = [
     equipment: ['Own hands', 'Gua sha (optional)', 'Jade/rose quartz roller (optional)', 'Oil or serum'],
     pricing: '₹ 450 / session',
     image: '/images/faceyogasoftnaturallight.jpeg',
+    imageRotate: -90,
     imagery: 'face yoga · soft natural light',
   },
   {
@@ -129,7 +131,6 @@ export const PROGRAMS = [
     equipment: ['Yoga mat'],
     pricing: 'On enquiry',
     image: '/images/seated_pranayammeditative.JPG',
-    imagePosition: 'center top',
     imagery: 'seated pranayam · still + meditative',
   },
   {
