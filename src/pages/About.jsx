@@ -150,8 +150,8 @@ const About = ({ setPage, onEnquire }) => (
           alignItems: 'center',
         }}>
           <img
-            src="/images/teacher%20behind%20the%20practice.jpeg"
-            alt="Tanvi — the teacher behind the practice"
+            src="/images/founder.jpg"
+            alt="Tanvi — founder of Swa-Swasthya"
             style={{ width: '100%', height: 580, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
           />
           <div>
