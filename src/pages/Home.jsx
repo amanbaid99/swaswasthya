@@ -180,11 +180,12 @@ const HomeStory = ({ setPage }) => (
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: 16,
+          gap: 12,
         }}>
-          <ImgPh label="early days — 2007" height={280} radius="var(--radius-md)" />
-          <img src="/images/Practicenow.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40 }} />
-          <ImgPh label="community group session" height={200} radius="var(--radius-md)" style={{ gridColumn: 'span 2', marginTop: -20 }} />
+          <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', marginTop: 40, imageOrientation: 'from-image' }} />
+          <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+          <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', marginTop: -40, imageOrientation: 'from-image' }} />
         </div>
       </div>
     </div>
