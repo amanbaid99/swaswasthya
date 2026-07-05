@@ -1,6 +1,6 @@
 import React from 'react';
 import { PROGRAMS } from '../data/programs.js';
-import { SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
+import { ImgPh, SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
 
 const HomeHero = ({ onEnquire, setPage }) => (
   <section style={{
