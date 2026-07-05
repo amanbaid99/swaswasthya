@@ -212,7 +212,7 @@ const ProgramCard = ({ p, onClick }) => (
   >
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       {p.image
-        ? <img src={p.image} alt={p.name} style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+        ? <img src={p.image} alt={p.name} style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center bottom', display: 'block' }} />
         : <ImgPh label={p.imagery} height={220} radius="0" style={{ background: p.bg }} />
       }
       <span style={{
