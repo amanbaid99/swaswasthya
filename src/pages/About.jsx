@@ -33,7 +33,11 @@ const About = ({ setPage, onEnquire }) => (
     {/* Founder portrait */}
     <section style={{ paddingBottom: 0 }}>
       <div className="container">
-        <ImgPh label="community in practice" height={520} radius="var(--radius-lg)" />
+        <img
+          src="/images/teacher_behind_the_practice.jpeg"
+          alt="Swa-Swasthya community in practice"
+          style={{ width: '100%', height: 520, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
+        />
       </div>
     </section>
 
