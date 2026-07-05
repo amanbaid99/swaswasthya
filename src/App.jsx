@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Footer, ThemeSwitch } from './components/common.jsx';
+import { Nav, Footer } from './components/common.jsx';
 import { EnquiryModal } from './pages/Contact.jsx';
 import { PROGRAMS } from './data/programs.js';
 import Home from './pages/Home.jsx';
@@ -10,21 +10,24 @@ import Contact from './pages/Contact.jsx';
 import Calculator from './pages/Calculator.jsx';
 
 export default function App() {
-  const [palette, setPaletteState] = React.useState(() => {
-    try { return localStorage.getItem('swa-palette') || 'default'; } catch (e) { return 'default'; }
+  const [isDark, setIsDark] = React.useState(() => {
+    try { return localStorage.getItem('swa-dark') === 'true'; } catch (e) { return false; }
   });
   const [page, setPage] = React.useState('home');
   const [activeProgramId, setActiveProgramId] = React.useState(null);
   const [enquiryOpen, setEnquiryOpen] = React.useState(false);
 
-  const setPalette = React.useCallback((v) => {
-    setPaletteState(v);
-    try { localStorage.setItem('swa-palette', v); } catch (e) {}
+  const toggleDark = React.useCallback(() => {
+    setIsDark((d) => {
+      const next = !d;
+      try { localStorage.setItem('swa-dark', next); } catch (e) {}
+      return next;
+    });
   }, []);
 
   React.useEffect(() => {
-    document.documentElement.dataset.palette = palette === 'default' ? '' : palette;
-  }, [palette]);
+    document.documentElement.dataset.palette = isDark ? 'dark' : 'boutique';
+  }, [isDark]);
 
   const onEnquire = () => setEnquiryOpen(true);
 
@@ -50,12 +53,9 @@ export default function App() {
 
   return (
     <div className="site-shell">
-      <Nav page={page} setPage={navigatePage} onEnquire={onEnquire} />
+      <Nav page={page} setPage={navigatePage} onEnquire={onEnquire} isDark={isDark} toggleDark={toggleDark} />
       {content}
       <Footer setPage={navigatePage} onEnquire={onEnquire} />
-
-      <ThemeSwitch palette={palette} setPalette={setPalette} />
-
       <EnquiryModal
         open={enquiryOpen}
         onClose={() => setEnquiryOpen(false)}

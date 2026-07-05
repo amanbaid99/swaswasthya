@@ -43,7 +43,7 @@ export const Logo = ({ size = 40 }) => (
   </div>
 );
 
-export const Nav = ({ page, setPage, onEnquire }) => {
+export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -132,6 +132,27 @@ export const Nav = ({ page, setPage, onEnquire }) => {
             Enquire
           </button>
           <button
+            onClick={toggleDark}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: '50%',
+              border: '1px solid var(--rule)',
+              background: 'var(--cream-light)',
+              color: 'var(--ink)',
+              fontSize: 16,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              transition: 'all 0.2s',
+            }}
+          >
+            {isDark ? '☀' : '☾'}
+          </button>
+          <button
             className="nav-burger"
             data-open={mobileOpen}
             aria-label="Menu"
@@ -173,6 +194,29 @@ export const Nav = ({ page, setPage, onEnquire }) => {
             <a href="tel:9923086478" className="btn btn-outline" style={{ width: '100%' }}>
               ☎ Call 99230 86478
             </a>
+            <button
+              onClick={toggleDark}
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--rule)',
+                borderRadius: 100,
+                padding: '10px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+                cursor: 'pointer',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 10,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--ink-soft)',
+                width: '100%',
+              }}
+            >
+              <span style={{ fontSize: 16 }}>{isDark ? '☀' : '☾'}</span>
+              {isDark ? 'Light mode' : 'Dark mode'}
+            </button>
             <a href="https://instagram.com/swaswasthya" target="_blank" rel="noreferrer" className="mono" style={{ textAlign: 'center', color: 'var(--ink-soft)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, paddingTop: 4 }}>
               @swaswasthya
             </a>
@@ -183,45 +227,6 @@ export const Nav = ({ page, setPage, onEnquire }) => {
   );
 };
 
-const THEMES = [
-  { id: 'default', name: 'Forest cream', a: '#1f3329', b: '#f0e5cf' },
-  { id: 'blush', name: 'Blush', a: '#a8654e', b: '#fbf1e9' },
-  { id: 'dark', name: 'Dark mode', a: '#f0e5cf', b: '#1f3329' },
-  { id: 'boutique', name: 'Boutique', a: '#b8765f', b: '#fdfaf2' },
-];
-
-export const ThemeSwitch = ({ palette, setPalette }) => {
-  const [open, setOpen] = React.useState(false);
-  const current = THEMES.find((t) => t.id === palette) || THEMES[0];
-  return (
-    <div className="theme-switch">
-      {open && (
-        <div className="theme-switch-panel">
-          <div className="ts-head">
-            <span>Choose a theme</span>
-            <button className="ts-close" aria-label="Close" onClick={() => setOpen(false)}>×</button>
-          </div>
-          {THEMES.map((t) => (
-            <button
-              key={t.id}
-              className="ts-option"
-              data-active={palette === t.id}
-              onClick={() => setPalette(t.id)}
-            >
-              <span className="ts-swatch" style={{ '--sw-a': t.a, '--sw-b': t.b }}></span>
-              <span className="ts-name">{t.name}</span>
-              <span className="ts-check">✓</span>
-            </button>
-          ))}
-        </div>
-      )}
-      <button className="theme-switch-toggle" onClick={() => setOpen((o) => !o)} aria-label="Change theme">
-        <span className="ts-swatch" style={{ '--sw-a': current.a, '--sw-b': current.b }}></span>
-        <span className="ts-label">Theme</span>
-      </button>
-    </div>
-  );
-};
 
 export const Footer = ({ setPage, onEnquire }) => (
   <footer style={{
