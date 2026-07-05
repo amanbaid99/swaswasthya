@@ -9,6 +9,7 @@ export const PROGRAMS = [
     color: 'var(--green-deep)',
     bg: 'var(--cream-deep)',
     image: '/images/Everyday%20Strength%20Training.jpg',
+    imageZoom: 0.88,
     schedule: 'Mon–Fri',
     timings: ['7:00 — 8:00 am', '10:15 — 11:15 am', '6:15 — 7:15 pm'],
     duration: '60 mins',
@@ -64,7 +65,6 @@ export const PROGRAMS = [
     equipment: ['Dumbbells', 'Resistance bands', 'Bricks, towels, props', 'Yoga mat', 'Own body weight'],
     pricing: '₹ 15,000 / month',
     image: '/images/personal_training.jpg',
-    imageRotate: -90,
     imagery: 'tanvi correcting form · 1:1 setting',
   },
   {
@@ -98,7 +98,6 @@ export const PROGRAMS = [
     equipment: ['Own hands', 'Gua sha (optional)', 'Jade/rose quartz roller (optional)', 'Oil or serum'],
     pricing: '₹ 450 / session',
     image: '/images/faceyogasoftnaturallight.jpeg',
-    imageRotate: -90,
     imagery: 'face yoga · soft natural light',
   },
   {

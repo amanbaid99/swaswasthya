@@ -212,9 +212,7 @@ const ProgramCard = ({ p, onClick }) => (
   >
     <div style={{ position: 'relative', overflow: 'hidden', height: 220 }}>
       {p.image
-        ? p.imageRotate
-          ? <img src={p.image} alt={p.name} style={{ position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(-50%, -50%) rotate(${p.imageRotate}deg)`, imageOrientation: 'from-image' }} />
-          : <img src={p.image} alt={p.name} style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: p.imagePosition || 'center center', display: 'block', imageOrientation: 'from-image' }} />
+        ? <img src={p.image} alt={p.name} style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: p.imagePosition || 'center center', display: 'block', imageOrientation: 'from-image', transform: p.imageZoom ? `scale(${p.imageZoom})` : undefined, transformOrigin: 'center center' }} />
         : <ImgPh label={p.imagery} height={220} radius="0" style={{ background: p.bg }} />
       }
       <span style={{
