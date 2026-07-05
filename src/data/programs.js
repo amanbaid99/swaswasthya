@@ -129,6 +129,7 @@ export const PROGRAMS = [
     equipment: ['Yoga mat'],
     pricing: 'On enquiry',
     image: '/images/seated_pranayammeditative.JPG',
+    imagePosition: 'center top',
     imagery: 'seated pranayam · still + meditative',
   },
   {
