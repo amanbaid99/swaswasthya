@@ -135,7 +135,7 @@ button { font-family: inherit; cursor: pointer; }
 /* Display sizes */
 .display-1 {
   font-family: var(--font-display);
-  font-size: clamp(40px, 11cqw, 200px);
+  font-size: clamp(40px, 8cqw, 130px);
   line-height: 0.94;
   font-weight: 400;
   letter-spacing: -0.025em;
