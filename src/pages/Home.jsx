@@ -402,59 +402,6 @@ const HomeSchedulePreview = ({ setPage }) => (
   </section>
 );
 
-const HomeTransformations = () => (
-  <section className="section" style={{ background: 'var(--blush-light)' }}>
-    <div className="container">
-      <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel num="04">
-          <span style={{ display: 'inline-block' }}>Transformations</span>
-        </SectionLabel>
-        <h2 className="display-2" style={{ maxWidth: 760, margin: '0 auto' }}>
-          No quick fixes. <span className="italic" style={{ color: 'var(--clay)' }}>Real, sustainable</span> change.
-        </h2>
-      </div>
-
-      <div className="trans-grid" style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 28,
-      }}>
-        {[
-          { name: 'Anjali', age: 38, time: '6 months', note: 'Lost 11kg, sleeps deeper, lifts heavier than she ever has.' },
-          { name: 'Priya', age: 52, time: '4 months', note: 'Joint pain gone, posture corrected, lower back finally calm.' },
-          { name: 'Meera', age: 29, time: 'Prenatal · all 3 trimesters', note: 'Stayed active, calm, and ready — birth prep felt grounded.' },
-        ].map((t, i) => (
-          <div key={i} className="card" style={{ padding: 0, overflow: 'hidden', background: 'var(--cream-light)' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: 'var(--rule)' }}>
-              <ImgPh label="before" height={220} radius="0" />
-              <ImgPh label="after" height={220} radius="0" />
-            </div>
-            <div style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 8 }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--green-deep)' }}>
-                  {t.name}, {t.age}
-                </div>
-                <span className="mono" style={{ fontSize: 10, color: 'var(--clay)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  {t.time}
-                </span>
-              </div>
-              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)' }}>
-                "{t.note}"
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <style>{`
-      @container site (max-width: 900px) {
-        .trans-grid { grid-template-columns: 1fr !important; }
-      }
-    `}</style>
-  </section>
-);
-
 const HomeTestimonials = () => {
   const quotes = [
     {
@@ -472,10 +419,15 @@ const HomeTestimonials = () => {
   ];
   const [idx, setIdx] = React.useState(0);
 
+  React.useEffect(() => {
+    const timer = setInterval(() => setIdx(i => (i + 1) % quotes.length), 7000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="section">
       <div className="container">
-        <SectionLabel num="05">From the community</SectionLabel>
+        <SectionLabel num="04">From the community</SectionLabel>
         <div style={{
           background: 'var(--cream-light)',
           border: '1px solid var(--rule)',
@@ -601,7 +553,6 @@ const Home = ({ setPage, onEnquire, onOpenProgram }) => (
     <HomeStory setPage={setPage} />
     <HomePrograms onOpenProgram={onOpenProgram} setPage={setPage} />
     <HomeSchedulePreview setPage={setPage} />
-    <HomeTransformations />
     <HomeTestimonials />
     <HomePress />
     <HomeFinalCTA onEnquire={onEnquire} />
