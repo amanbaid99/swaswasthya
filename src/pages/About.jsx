@@ -150,7 +150,7 @@ const About = ({ setPage, onEnquire }) => (
           alignItems: 'center',
         }}>
           <img
-            src="/images/The%20teacher%20behind%20the%20practice.JPG"
+            src="/images/teacher%20behind%20the%20practice.jpeg"
             alt="Tanvi — the teacher behind the practice"
             style={{ width: '100%', height: 580, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
           />
