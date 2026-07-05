@@ -181,10 +181,10 @@ const HomeStory = ({ setPage }) => (
         <div style={{ display: 'flex', gap: 12 }}>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
             <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
-            <img src="/images/our_story_1.JPG" alt="Sound healing session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center bottom', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 48 }}>
-            <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            <img src="/images/our_story_1.JPG" alt="Tanvi portrait" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
             <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
           </div>
         </div>
