@@ -1,6 +1,6 @@
 import React from 'react';
 import { PROGRAMS } from '../data/programs.js';
-import { ImgPh, SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
+import { SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
 
 const HomeHero = ({ onEnquire, setPage }) => (
   <section style={{
@@ -49,16 +49,30 @@ const HomeHero = ({ onEnquire, setPage }) => (
       <div className="hero-grid" style={{
         marginTop: 56,
         display: 'grid',
-        gridTemplateColumns: '1fr 1.2fr 1fr',
-        gap: 28,
-        alignItems: 'end',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 40,
+        alignItems: 'start',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <img
-            src="/images/founder.jpg"
-            alt="Tanvi — founder of Swa-Swasthya"
-            style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block' }}
-          />
+          <div style={{ position: 'relative' }}>
+            <img
+              src="/images/founder.jpg"
+              alt="Tanvi — founder of Swa-Swasthya"
+              style={{ width: '100%', height: 480, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
+            />
+            <div style={{
+              position: 'absolute',
+              bottom: 16,
+              left: 16,
+              right: 16,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+            }}>
+              <span className="tag tag-filled">▸ Now booking</span>
+              <span className="tag" style={{ background: 'var(--cream-light)' }}>Online + In-person</span>
+            </div>
+          </div>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -76,24 +90,6 @@ const HomeHero = ({ onEnquire, setPage }) => (
             }}>
               "swa is self and swasthya is health — finding the right balance is how we become our best self."
             </p>
-          </div>
-        </div>
-
-        <div style={{ position: 'relative' }}>
-          <ImgPh label="hero · woman mid-flow · soft morning light" height={520} radius="var(--radius-lg)" />
-          <div style={{
-            position: 'absolute',
-            bottom: 20,
-            left: 20,
-            right: 20,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-          }}>
-            <span className="tag tag-filled">▸ Now booking</span>
-            <span className="tag" style={{ background: 'var(--cream-light)' }}>
-              Online + In-person
-            </span>
           </div>
         </div>
 
@@ -159,7 +155,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
     </div>
 
     <style>{`
-      @container site (max-width: 900px) {
+      @container site (max-width: 720px) {
         .hero-grid { grid-template-columns: 1fr !important; }
       }
     `}</style>
