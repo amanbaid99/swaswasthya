@@ -34,7 +34,7 @@ const About = ({ setPage, onEnquire }) => (
     <section style={{ paddingBottom: 0 }}>
       <div className="container">
         <img
-          src="/images/teacher_behind_the_practice.jpeg"
+          src="/images/founder.jpg"
           alt="Swa-Swasthya community in practice"
           style={{ width: '100%', height: 520, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
         />
@@ -150,8 +150,8 @@ const About = ({ setPage, onEnquire }) => (
           alignItems: 'center',
         }}>
           <img
-            src="/images/founder.jpg"
-            alt="Tanvi — founder of Swa-Swasthya"
+            src="/images/teacher_behind_the_practice.jpeg"
+            alt="Tanvi — the teacher behind the practice"
             style={{ width: '100%', height: 580, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
           />
           <div>
