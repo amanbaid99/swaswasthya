@@ -52,18 +52,18 @@ const HomeHero = ({ onEnquire, setPage }) => (
       {/* A note from Tanvi */}
       <div style={{
         paddingTop: 24,
-        paddingBottom: 36,
+        paddingBottom: 20,
         borderTop: '1px solid var(--rule)',
-        marginBottom: 28,
+        marginBottom: 16,
       }}>
         <span className="eyebrow" style={{ display: 'block', marginBottom: 10 }}>A note from Tanvi</span>
         <p style={{
           fontFamily: 'var(--font-display)',
           fontStyle: 'italic',
-          fontSize: 24,
+          fontSize: 'clamp(16px, 2cqw, 24px)',
           lineHeight: 1.3,
           color: 'var(--green-deep)',
-          maxWidth: 760,
+          whiteSpace: 'nowrap',
         }}>
           "swa is self and swasthya is health — finding the right balance is how we become our best self."
         </p>
