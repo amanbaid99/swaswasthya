@@ -503,6 +503,68 @@ const HomePress = () => (
   </section>
 );
 
+const BLOG_POSTS = [
+  // Add posts here like:
+  // {
+  //   slug: 'post-slug',
+  //   category: 'Strength',
+  //   date: 'June 2026',
+  //   title: 'Post title',
+  //   excerpt: 'Short description...',
+  //   image: '/images/blog-post.jpg',
+  // },
+];
+
+const HomeBlog = () => {
+  if (BLOG_POSTS.length === 0) return null;
+  return (
+    <section className="section">
+      <div className="container">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
+          <div>
+            <SectionLabel num="05">Journal</SectionLabel>
+            <h2 className="display-2">
+              From the <span className="italic" style={{ color: 'var(--clay)' }}>practice</span>.
+            </h2>
+          </div>
+          <button className="btn btn-ghost btn-sm">All posts →</button>
+        </div>
+
+        <div className="blog-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 28,
+        }}>
+          {BLOG_POSTS.map((post, i) => (
+            <article key={i} className="card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}>
+              {post.image
+                ? <img src={post.image} alt={post.title} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+                : <ImgPh label={post.category} height={220} radius="0" />
+              }
+              <div style={{ padding: '24px 28px 28px' }}>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
+                  <span className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--clay)' }}>{post.category}</span>
+                  <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--rule)', display: 'inline-block' }} />
+                  <span className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>{post.date}</span>
+                </div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--green-deep)', lineHeight: 1.3, marginBottom: 10 }}>{post.title}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 20 }}>{post.excerpt}</p>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--green-deep)' }}>Read →</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @container site (max-width: 900px) {
+          .blog-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+};
+
 const Home = ({ setPage, onEnquire, onOpenProgram }) => (
   <main>
     <HomeHero setPage={setPage} onEnquire={onEnquire} />
@@ -511,6 +573,7 @@ const Home = ({ setPage, onEnquire, onOpenProgram }) => (
     <HomePrograms onOpenProgram={onOpenProgram} setPage={setPage} />
     <HomeSchedulePreview setPage={setPage} />
     <HomeTestimonials />
+    <HomeBlog />
     <HomePress />
     <HomeFinalCTA onEnquire={onEnquire} />
   </main>
