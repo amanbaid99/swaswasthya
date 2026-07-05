@@ -406,6 +406,10 @@ const TESTIMONIALS = [
     q: `I started it with my doctor's permission in about 3.5 months. I started realising its benefits gradually after a couple of months — even in the later months, I didn't have back ache or swollen feet, touchwood.\n\nIt has really helped me remain active throughout the pregnancy. I am especially surprised because I did not regularly exercise before I joined prenatal yoga and was not sure initially if I could manage. But thankfully, all went well and I am continuing it for the past 5 months till date and on!\n\nTanvi madam's overall personality is a great positive driving force. She takes the classes at each individual's comfortable pace and slowly increases and adds new necessary exercises. Even in online classes, madam has a close eye for details due to her experience — she gives personalised attention to every student.\n\nFor someone like me who did not like exercise or yoga before, I have surprisingly developed a liking for yoga too!`,
     who: 'Swa-Antara · Prenatal Wellness',
   },
+  {
+    q: `My fitness journey with Tanvi Dharmadhikari has been a progressive and a very humbling experience. She teaches us all the effective, different and impactful yoga poses with sheer dedication and makes sure that each workout is different from the other to avoid monotony.\n\nShe has targeted our problem and weak areas to strengthen on an individual level with her personal attention as well. I wake up every morning looking forward to her class and have achieved a good lung capacity and flexibility because of these stress busting yoga sessions.\n\nMost importantly, her friendly and motivating persona makes the class even more fun. Thank you so much Tanvi — you are the best!`,
+    who: 'Swa-Shakti · Group Batch',
+  },
 ];
 
 const HomeTestimonials = () => (
