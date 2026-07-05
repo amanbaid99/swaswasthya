@@ -29,8 +29,13 @@ const ProgramRow = ({ p, index, onOpen }) => {
         background: 'var(--cream-light)',
       }}
     >
-      <div style={{ order: flip ? 2 : 1 }}>
-        <ImgPh label={p.imagery} height={420} radius="0" style={{ background: p.bg }} />
+      <div style={{ order: flip ? 2 : 1, overflow: 'hidden', position: 'relative', height: 420 }}>
+        {p.image
+          ? p.imageRotate
+            ? <img src={p.image} alt={p.name} style={{ position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(-50%, -50%) rotate(${p.imageRotate}deg)`, imageOrientation: 'from-image' }} />
+            : <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: p.imagePosition || 'center center', imageOrientation: 'from-image', display: 'block' }} />
+          : <ImgPh label={p.imagery} height={420} radius="0" style={{ background: p.bg }} />
+        }
       </div>
       <div style={{
         order: flip ? 1 : 2,
@@ -134,7 +139,15 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
             </div>
           </div>
 
-          <ImgPh label={p.imagery} height={520} radius="var(--radius-lg)" style={{ background: p.bg }} />
+          {p.image
+            ? <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', position: 'relative', height: 520 }}>
+                {p.imageRotate
+                  ? <img src={p.image} alt={p.name} style={{ position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(-50%, -50%) rotate(${p.imageRotate}deg)`, imageOrientation: 'from-image' }} />
+                  : <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: p.imagePosition || 'center center', imageOrientation: 'from-image', display: 'block' }} />
+                }
+              </div>
+            : <ImgPh label={p.imagery} height={520} radius="var(--radius-lg)" style={{ background: p.bg }} />
+          }
         </div>
       </div>
 
