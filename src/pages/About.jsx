@@ -33,7 +33,11 @@ const About = ({ setPage, onEnquire }) => (
     {/* Founder portrait */}
     <section style={{ paddingBottom: 0 }}>
       <div className="container">
-        <ImgPh label="founder portrait · full-bleed editorial" height={520} radius="var(--radius-lg)" />
+        <img
+          src="/images/founder.jpg"
+          alt="Tanvi — founder of Swa-Swasthya"
+          style={{ width: '100%', height: 520, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
+        />
       </div>
     </section>
 
@@ -145,7 +149,11 @@ const About = ({ setPage, onEnquire }) => (
           gap: 72,
           alignItems: 'center',
         }}>
-          <ImgPh label="tanvi · founder portrait" height={580} radius="var(--radius-lg)" />
+          <img
+            src="/images/founder.jpg"
+            alt="Tanvi — founder of Swa-Swasthya"
+            style={{ width: '100%', height: 580, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
+          />
           <div>
             <SectionLabel num="03">Meet Tanvi</SectionLabel>
             <h2 className="display-2" style={{ marginBottom: 28 }}>

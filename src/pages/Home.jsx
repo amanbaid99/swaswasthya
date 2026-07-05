@@ -54,7 +54,11 @@ const HomeHero = ({ onEnquire, setPage }) => (
         alignItems: 'end',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <ImgPh label="founder portrait" height={220} radius="var(--radius-md)" />
+          <img
+            src="/images/founder.jpg"
+            alt="Tanvi — founder of Swa-Swasthya"
+            style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block' }}
+          />
           <div style={{
             display: 'flex',
             flexDirection: 'column',
