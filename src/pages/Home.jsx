@@ -408,6 +408,18 @@ const TESTIMONIALS = [
     q: `My fitness journey with Tanvi Dharmadhikari has been a progressive and a very humbling experience. She teaches us all the effective, different and impactful yoga poses with sheer dedication and makes sure that each workout is different from the other to avoid monotony.\n\nShe has targeted our problem and weak areas to strengthen on an individual level with her personal attention as well. I wake up every morning looking forward to her class and have achieved a good lung capacity and flexibility because of these stress busting yoga sessions.\n\nMost importantly, her friendly and motivating persona makes the class even more fun. Thank you so much Tanvi — you are the best!`,
     who: 'Swa-Shakti · Group Batch',
   },
+  {
+    q: `I delivered my baby boy on 13th September through a normal delivery.\n\nI want to sincerely thank you for making my pregnancy journey so enjoyable with your prenatal yoga and strengthening exercises. I've been consistent with the classes since my 4th month, and they became the highlight of my pregnancy. Each session filled my day with so much positivity and calmness — I truly looked forward to them every day!\n\nThe breathing exercises and Pavanmuktasana you taught were incredibly helpful during labor, especially when it came to managing the pain and pushing. I feel that your guidance was a key part of my smooth pregnancy and successful delivery.\n\nA big thank you for dedicating your time to teaching me these asanas, which made such a difference in my pregnancy!`,
+    who: 'Swa-Antara · Prenatal Wellness',
+  },
+  {
+    q: `I wanted to take a moment to express my sincere gratitude for the dedication and effort you put into our gym sessions. Your commitment to providing a well-rounded workout routine — including varied exercises for the upper body, lower body, and even incorporating yoga on Wednesdays — is truly commendable.\n\nThe variety in our workouts keeps us motivated and engaged, and I appreciate how you plan each week's schedule in advance with such care. Your hard work does not go unnoticed, and it makes a significant difference in our fitness journey.\n\nThank you for inspiring us to stay active and for making every workout session enjoyable and effective.`,
+    who: 'Madhu Navlakha · Swa-Shakti',
+  },
+  {
+    q: `All the years down the lane, exercise has been an integral part of my life — and all thanks to you for making it so exciting that we all look forward to our batch every single day.\n\nStaying fit and healthy and working out every day is what you have embedded in everyone's mind and soul. Starting a day without you is what I cannot think of for the rest of my life.\n\nThank you from the bottom of my heart.`,
+    who: 'Hina Gujar · Long-standing Member',
+  },
 ];
 
 const HomeTestimonials = () => (
