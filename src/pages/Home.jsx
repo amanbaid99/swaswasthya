@@ -10,23 +10,10 @@ const HomeHero = ({ onEnquire, setPage }) => (
     overflow: 'hidden',
   }}>
     <div className="container">
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 24,
-        flexWrap: 'wrap',
-        gap: 12,
-      }}>
-        <span className="eyebrow">For the woman you were, are, and are becoming</span>
-        <span className="eyebrow" style={{ color: 'var(--clay)' }}>
-          ✦ Est. 2007 · 18+ years
-        </span>
-      </div>
 
-      <div style={{ position: 'relative' }}>
+      {/* Title + EST 2007 + tagline */}
+      <div style={{ textAlign: 'center', marginBottom: 40 }}>
         <h1 className="display-1" style={{
-          textAlign: 'center',
           color: 'var(--green-deep)',
           fontStyle: 'italic',
           letterSpacing: '-0.04em',
@@ -34,129 +21,128 @@ const HomeHero = ({ onEnquire, setPage }) => (
           Swa-Swasthya
         </h1>
         <div style={{
-          textAlign: 'center',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
           color: 'var(--ink-soft)',
-          marginTop: -4,
+          marginTop: 14,
+          marginBottom: 14,
         }}>
-          Balanced Fitness · Mind & Body
+          EST 2007
         </div>
+        <span className="eyebrow">For the woman you were, are, and are becoming</span>
       </div>
 
-      <div className="hero-grid" style={{
-        marginTop: 56,
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: 40,
-        alignItems: 'start',
+      {/* Full-width founder image */}
+      <img
+        src="/images/founder.jpg"
+        alt="Tanvi — founder of Swa-Swasthya"
+        style={{
+          width: '100%',
+          height: 580,
+          objectFit: 'cover',
+          objectPosition: 'center top',
+          borderRadius: 'var(--radius-lg)',
+          display: 'block',
+          marginBottom: 28,
+        }}
+      />
+
+      {/* A note from Tanvi */}
+      <div style={{
+        paddingTop: 24,
+        paddingBottom: 36,
+        borderTop: '1px solid var(--rule)',
+        marginBottom: 28,
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <div style={{ position: 'relative' }}>
-            <img
-              src="/images/founder.jpg"
-              alt="Tanvi — founder of Swa-Swasthya"
-              style={{ width: '100%', height: 480, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
-            />
-            <div style={{
-              position: 'absolute',
-              bottom: 16,
-              left: 16,
-              right: 16,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-end',
-            }}>
-              <span className="tag tag-filled">▸ Now booking</span>
-              <span className="tag" style={{ background: 'var(--cream-light)' }}>Online + In-person</span>
-            </div>
+        <span className="eyebrow" style={{ display: 'block', marginBottom: 10 }}>A note from Tanvi</span>
+        <p style={{
+          fontFamily: 'var(--font-display)',
+          fontStyle: 'italic',
+          fontSize: 24,
+          lineHeight: 1.3,
+          color: 'var(--green-deep)',
+          maxWidth: 760,
+        }}>
+          "swa is self and swasthya is health — finding the right balance is how we become our best self."
+        </p>
+      </div>
+
+      {/* Stats + CTAs row */}
+      <div className="hero-bottom" style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1.4fr 1fr',
+        gap: 20,
+        alignItems: 'stretch',
+      }}>
+
+        {/* 400+ community card */}
+        <div style={{
+          padding: '24px 26px',
+          background: 'var(--green-deep)',
+          color: 'var(--cream)',
+          borderRadius: 'var(--radius-md)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+        }}>
+          <div className="mono" style={{ color: 'var(--tan)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10 }}>
+            The community
           </div>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 8,
-            paddingTop: 16,
-            borderTop: '1px solid var(--rule)',
-          }}>
-            <span className="eyebrow">A note from Tanvi</span>
-            <p style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: 22,
-              lineHeight: 1.3,
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 1, color: 'var(--cream-light)' }}>
+            400+
+          </div>
+          <div style={{ fontSize: 13, opacity: 0.7 }}>women across ages, on the path</div>
+        </div>
+
+        {/* 6 programs card */}
+        <div style={{
+          padding: '24px 26px',
+          border: '1px solid var(--rule)',
+          borderRadius: 'var(--radius-md)',
+          background: 'var(--cream-light)',
+        }}>
+          <div className="mono" style={{ color: 'var(--green-soft)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, marginBottom: 8 }}>
+            6 programs
+          </div>
+          <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 14 }}>
+            From everyday strength to face yog & prenatal care
+          </div>
+          <button
+            onClick={() => setPage('programs')}
+            style={{
+              background: 'transparent',
+              border: 'none',
               color: 'var(--green-deep)',
-            }}>
-              "swa is self and swasthya is health — finding the right balance is how we become our best self."
-            </p>
-          </div>
+              fontFamily: 'var(--font-mono)',
+              fontSize: 11,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              padding: 0,
+            }}
+          >
+            See all programs →
+          </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          <div style={{
-            padding: '20px 22px',
-            background: 'var(--green-deep)',
-            color: 'var(--cream)',
-            borderRadius: 'var(--radius-md)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 4,
-          }}>
-            <div className="mono" style={{ color: 'var(--tan)', letterSpacing: '0.16em', textTransform: 'uppercase', fontSize: 10 }}>
-              The community
-            </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 56, lineHeight: 1, color: 'var(--cream-light)' }}>
-              400+
-            </div>
-            <div style={{ fontSize: 13, opacity: 0.7 }}>women across ages, on the path</div>
-          </div>
-
-          <div style={{
-            padding: '20px 22px',
-            border: '1px solid var(--rule)',
-            borderRadius: 'var(--radius-md)',
-            background: 'var(--cream-light)',
-          }}>
-            <div className="mono" style={{ color: 'var(--green-soft)', letterSpacing: '0.16em', textTransform: 'uppercase', fontSize: 10, marginBottom: 6 }}>
-              6 programs
-            </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 12 }}>
-              From everyday strength to face yog & prenatal care
-            </div>
-            <button
-              onClick={() => setPage('programs')}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--green-deep)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: 11,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                padding: 0,
-              }}
-            >
-              See all programs →
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <button className="btn btn-primary" onClick={onEnquire} style={{ width: '100%' }}>
-              Book a free intro session
-            </button>
-            <button className="btn btn-outline" onClick={() => setPage('schedule')} style={{ width: '100%' }}>
-              View weekly schedule
-            </button>
-          </div>
+        {/* CTAs */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'center' }}>
+          <button className="btn btn-primary" onClick={onEnquire} style={{ width: '100%' }}>
+            Book a free intro session
+          </button>
+          <button className="btn btn-outline" onClick={() => setPage('schedule')} style={{ width: '100%' }}>
+            View weekly schedule
+          </button>
         </div>
+
       </div>
     </div>
 
     <style>{`
-      @container site (max-width: 720px) {
-        .hero-grid { grid-template-columns: 1fr !important; }
+      @container site (max-width: 760px) {
+        .hero-bottom { grid-template-columns: 1fr !important; }
       }
     `}</style>
   </section>
