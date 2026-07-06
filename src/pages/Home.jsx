@@ -1,6 +1,7 @@
 import React from 'react';
 import { PROGRAMS } from '../data/programs.js';
 import { ImgPh, SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
+import { supabase } from '../lib/supabase.js';
 
 const HomeHero = ({ onEnquire, setPage }) => (
   <section style={{
@@ -503,20 +504,26 @@ const HomePress = () => (
   </section>
 );
 
-const BLOG_POSTS = [
-  // Add posts here like:
-  // {
-  //   slug: 'post-slug',
-  //   category: 'Strength',
-  //   date: 'June 2026',
-  //   title: 'Post title',
-  //   excerpt: 'Short description...',
-  //   image: '/images/blog-post.jpg',
-  // },
-];
-
 const HomeBlog = () => {
-  if (BLOG_POSTS.length === 0) return null;
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    if (!supabase) return;
+    supabase
+      .from('blogs')
+      .select('id, title, slug, category, excerpt, image_url, published_at')
+      .eq('published', true)
+      .order('published_at', { ascending: false })
+      .limit(3)
+      .then(({ data }) => setPosts(data || []));
+  }, []);
+
+  if (posts.length === 0) return null;
+
+  const fmtDate = (ts) => ts
+    ? new Date(ts).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })
+    : '';
+
   return (
     <section className="section">
       <div className="container">
@@ -535,17 +542,17 @@ const HomeBlog = () => {
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 28,
         }}>
-          {BLOG_POSTS.map((post, i) => (
-            <article key={i} className="card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}>
-              {post.image
-                ? <img src={post.image} alt={post.title} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+          {posts.map((post) => (
+            <article key={post.id} className="card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}>
+              {post.image_url
+                ? <img src={post.image_url} alt={post.title} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
                 : <ImgPh label={post.category} height={220} radius="0" />
               }
               <div style={{ padding: '24px 28px 28px' }}>
                 <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
                   <span className="mono" style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--clay)' }}>{post.category}</span>
                   <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--rule)', display: 'inline-block' }} />
-                  <span className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>{post.date}</span>
+                  <span className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>{fmtDate(post.published_at)}</span>
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--green-deep)', lineHeight: 1.3, marginBottom: 10 }}>{post.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 20 }}>{post.excerpt}</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Nav, Footer } from './components/common.jsx';
 import { EnquiryModal } from './pages/Contact.jsx';
 import { PROGRAMS } from './data/programs.js';
@@ -9,8 +9,9 @@ import Programs from './pages/Programs.jsx';
 import Schedule from './pages/Schedule.jsx';
 import Contact from './pages/Contact.jsx';
 import Calculator from './pages/Calculator.jsx';
+import Admin from './pages/Admin.jsx';
 
-function AppInner() {
+function SiteInner() {
   const navigate = useNavigate();
   const [isDark, setIsDark] = React.useState(() => {
     try { return localStorage.getItem('swa-dark') === 'true'; } catch (e) { return false; }
@@ -44,7 +45,6 @@ function AppInner() {
     window.scrollTo(0, 0);
   };
 
-  // derive current page string for Nav active state
   const currentPage = window.location.pathname === '/' ? 'home' : window.location.pathname.slice(1).split('/')[0];
 
   return (
@@ -72,7 +72,10 @@ function AppInner() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppInner />
+      <Routes>
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="*" element={<SiteInner />} />
+      </Routes>
     </BrowserRouter>
   );
 }
