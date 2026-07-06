@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PROGRAMS } from '../data/programs.js';
 import { ImgPh, SectionLabel, Marquee, HomeFinalCTA } from '../components/common.jsx';
 import { supabase } from '../lib/supabase.js';
@@ -505,6 +506,7 @@ const HomePress = () => (
 );
 
 const HomeBlog = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = React.useState([]);
 
   React.useEffect(() => {
@@ -534,7 +536,7 @@ const HomeBlog = () => {
               From the <span className="italic" style={{ color: 'var(--clay)' }}>practice</span>.
             </h2>
           </div>
-          <button className="btn btn-ghost btn-sm">All posts →</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => navigate('/blog')}>All posts →</button>
         </div>
 
         <div className="blog-grid" style={{
@@ -543,7 +545,7 @@ const HomeBlog = () => {
           gap: 28,
         }}>
           {posts.map((post) => (
-            <article key={post.id} className="card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}>
+            <article key={post.id} className="card" onClick={() => navigate(`/blog/${post.slug}`)} style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}>
               {post.image_url
                 ? <img src={post.image_url} alt={post.title} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
                 : <ImgPh label={post.category} height={220} radius="0" />

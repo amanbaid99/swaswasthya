@@ -10,6 +10,7 @@ import Schedule from './pages/Schedule.jsx';
 import Contact from './pages/Contact.jsx';
 import Calculator from './pages/Calculator.jsx';
 import Admin from './pages/Admin.jsx';
+import Blog from './pages/Blog.jsx';
 
 function SiteInner() {
   const navigate = useNavigate();
@@ -57,6 +58,8 @@ function SiteInner() {
         <Route path="/schedule" element={<Schedule onEnquire={onEnquire} />} />
         <Route path="/contact" element={<Contact onEnquire={onEnquire} />} />
         <Route path="/calculator" element={<Calculator onEnquire={onEnquire} setPage={navigatePage} />} />
+        <Route path="/blog" element={<Blog onEnquire={onEnquire} />} />
+        <Route path="/blog/:slug" element={<Blog onEnquire={onEnquire} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer setPage={navigatePage} onEnquire={onEnquire} />

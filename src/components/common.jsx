@@ -58,8 +58,8 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
     { id: 'about', label: 'About' },
     { id: 'programs', label: 'Programs' },
     { id: 'schedule', label: 'Schedule' },
+    { id: 'blog', label: 'Journal' },
     { id: 'contact', label: 'Contact' },
-    { id: 'calculator', label: 'Calculate' },
   ];
 
   const go = (id) => {
