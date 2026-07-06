@@ -1,643 +1,121 @@
 import React from 'react';
-import { PROGRAMS } from '../data/programs.js';
-import { ImgPh, SectionLabel } from '../components/common.jsx';
-import { sendEnquiry } from '../lib/email.js';
+import { SectionLabel, HomeFinalCTA } from '../components/common.jsx';
 
-const ContactCard = ({ label, title, sub, cta, href, dark }) => (
+const WA_URL = 'https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs.';
+
+const WaIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
+
+const ContactItem = ({ label, value, href, primary }) => (
   <a
     href={href}
+    target={href?.startsWith('http') ? '_blank' : undefined}
+    rel="noreferrer"
     style={{
-      padding: '28px 30px',
-      background: dark ? 'var(--green-deep)' : 'var(--cream-light)',
-      color: dark ? 'var(--cream)' : 'var(--ink)',
-      border: dark ? 'none' : '1px solid var(--rule)',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8,
+      padding: '32px 36px',
+      background: primary ? 'var(--green-deep)' : 'var(--cream-light)',
+      border: primary ? 'none' : '1px solid var(--rule)',
       borderRadius: 'var(--radius-md)',
-      display: 'block',
-      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+      textDecoration: 'none',
+      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+      cursor: 'pointer',
     }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = 'translateY(-2px)';
-      e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.boxShadow = 'none';
-    }}
+    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-hover)'; }}
+    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
   >
-    <div className="mono" style={{
-      fontSize: 10,
-      letterSpacing: '0.14em',
-      textTransform: 'uppercase',
-      color: dark ? 'var(--tan)' : 'var(--green-soft)',
-      marginBottom: 8,
-    }}>
+    <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: primary ? 'rgba(240,229,207,0.6)' : 'var(--ink-soft)' }}>
       {label}
-    </div>
-    <div style={{
-      fontFamily: 'var(--font-display)',
-      fontStyle: 'italic',
-      fontSize: 30,
-      lineHeight: 1.15,
-      color: dark ? 'var(--cream-light)' : 'var(--green-deep)',
-      marginBottom: 8,
-    }}>
-      {title}
-    </div>
-    <div style={{
-      fontSize: 13,
-      color: dark ? 'rgba(240, 229, 207, 0.7)' : 'var(--ink-soft)',
-      marginBottom: 16,
-      lineHeight: 1.5,
-    }}>
-      {sub}
-    </div>
-    <div className="mono" style={{
-      fontSize: 11,
-      letterSpacing: '0.14em',
-      textTransform: 'uppercase',
-      color: dark ? 'var(--blush)' : 'var(--clay)',
-    }}>
-      {cta} →
-    </div>
+    </span>
+    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 24, color: primary ? 'var(--cream)' : 'var(--green-deep)', lineHeight: 1.3 }}>
+      {value}
+    </span>
   </a>
 );
 
-const FAQList = () => {
-  const faqs = [
-    {
-      q: "I've never trained before. Is this for me?",
-      a: "Yes — most of our community started with us at \"complete beginner\". Every session has variations for all levels, and we begin with form first, always.",
-    },
-    {
-      q: 'Online or offline — what should I pick?',
-      a: 'Online works beautifully for the majority of our members (most live outside Pune). Offline is best if you want hands-on form correction and the energy of a room. You can switch between the two.',
-    },
-    {
-      q: 'How long until I see results?',
-      a: 'Strength changes show in 3–4 weeks. Visible body recomposition typically lands at 8–12 weeks of consistent practice. The Swa transformation capsule has a more accelerated timeline.',
-    },
-    {
-      q: 'Do you accept men in the group batches?',
-      a: "Our group batches are women-only — it's deliberate and part of the community feel. The 1:1 personal training program is open to all.",
-    },
-    {
-      q: 'Cancellation and rescheduling?',
-      a: 'Reschedule any session up to 4 hours before. Monthly plans are non-refundable after the first week, but unused sessions roll over with prior notice.',
-    },
-  ];
-  const [open, setOpen] = React.useState(0);
-  return (
-    <div>
-      {faqs.map((f, i) => {
-        const isOpen = open === i;
-        return (
-          <div key={i} style={{
-            borderTop: '1px solid var(--rule)',
-            borderBottom: i === faqs.length - 1 ? '1px solid var(--rule)' : 'none',
-          }}>
-            <button
-              onClick={() => setOpen(isOpen ? -1 : i)}
-              style={{
-                width: '100%',
-                background: 'transparent',
-                border: 'none',
-                padding: '24px 0',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: 24,
-                cursor: 'pointer',
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontSize: 22,
-                color: 'var(--green-deep)',
-                textAlign: 'left',
-                lineHeight: 1.3,
-              }}
-            >
-              <span>{f.q}</span>
-              <span style={{
-                color: 'var(--clay)',
-                fontSize: 22,
-                transition: 'transform 0.25s',
-                transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                flexShrink: 0,
-              }}>+</span>
-            </button>
-            {isOpen && (
-              <div style={{
-                paddingBottom: 24,
-                fontSize: 16,
-                lineHeight: 1.65,
-                color: 'var(--ink-soft)',
-                maxWidth: 620,
-                animation: 'fadein 0.25s ease',
-              }}>
-                {f.a}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export const EnquiryModal = ({ open, onClose, initialProgram }) => {
-  const [step, setStep] = React.useState(1);
-  const [form, setForm] = React.useState({
-    name: '',
-    email: '',
-    phone: '',
-    program: initialProgram || 'Swa-Shakti',
-    mode: 'Online',
-    when: 'Within a week',
-    message: '',
-  });
-
-  const [sending, setSending] = React.useState(false);
-
-  React.useEffect(() => {
-    if (open) { setStep(1); setSending(false); }
-  }, [open]);
-
-  if (!open) return null;
-
-  const submit = async () => {
-    setSending(true);
-    await sendEnquiry({
-      source: 'Enquiry Modal',
-      from_name: form.name,
-      from_email: form.email,
-      phone: form.phone || '—',
-      interest: form.program,
-      mode: form.mode,
-      when: form.when,
-      message: form.message || '—',
-      reply_to: form.email,
-    });
-    setSending(false);
-    setStep(3);
-  };
-
-  return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 580 }}>
-        <button
-          onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: 16,
-            right: 16,
-            background: 'transparent',
-            border: 'none',
-            fontSize: 24,
-            color: 'var(--ink-soft)',
-            cursor: 'pointer',
-            zIndex: 2,
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-          }}
-        >
-          ×
-        </button>
-
-        {step !== 3 && (
-          <div style={{
-            padding: '32px 40px 16px',
-            borderBottom: '1px solid var(--rule)',
-          }}>
-            <div className="mono" style={{ fontSize: 10, letterSpacing: '0.18em', color: 'var(--green-soft)', textTransform: 'uppercase', marginBottom: 8 }}>
-              Step {step} of 2 · Free intro session
-            </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 32, color: 'var(--green-deep)', lineHeight: 1.15 }}>
-              {step === 1 ? 'Tell us about yourself.' : "And a bit about what you're looking for."}
-            </div>
-          </div>
-        )}
-
-        <div style={{ padding: step === 3 ? '60px 40px' : '32px 40px 40px' }}>
-          {step === 1 && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-              <div className="field">
-                <label>Your name</label>
-                <input
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="e.g. Anjali"
-                  autoFocus
-                />
-              </div>
-              <div className="field">
-                <label>Email</label>
-                <input
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  type="email"
-                  placeholder="you@example.com"
-                />
-              </div>
-              <div className="field">
-                <label>Phone / WhatsApp</label>
-                <input
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  type="tel"
-                  placeholder="+91 …"
-                />
-              </div>
-              <button
-                onClick={() => setStep(2)}
-                className="btn btn-primary"
-                disabled={!form.name || !form.email}
-                style={{
-                  marginTop: 12,
-                  opacity: (!form.name || !form.email) ? 0.5 : 1,
-                }}
-              >
-                Continue →
-              </button>
-            </div>
-          )}
-
-          {step === 2 && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-              <div className="field">
-                <label>Which program interests you?</label>
-                <select
-                  value={form.program}
-                  onChange={(e) => setForm({ ...form, program: e.target.value })}
-                >
-                  {PROGRAMS.map((p) => <option key={p.id}>{p.name}</option>)}
-                  <option>Not sure — let's talk</option>
-                </select>
-              </div>
-
-              <div className="field">
-                <label>Preferred mode</label>
-                <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-                  {['Online', 'Offline', 'Either'].map((m) => (
-                    <button
-                      key={m}
-                      onClick={() => setForm({ ...form, mode: m })}
-                      type="button"
-                      style={{
-                        padding: '10px 18px',
-                        border: '1px solid',
-                        borderColor: form.mode === m ? 'var(--green-deep)' : 'var(--rule)',
-                        background: form.mode === m ? 'var(--green-deep)' : 'transparent',
-                        color: form.mode === m ? 'var(--cream)' : 'var(--ink)',
-                        borderRadius: 100,
-                        fontSize: 13,
-                        cursor: 'pointer',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                    >
-                      {m}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="field">
-                <label>When would you like to start?</label>
-                <div style={{ display: 'flex', gap: 8, marginTop: 4, flexWrap: 'wrap' }}>
-                  {['This week', 'Within a month', 'Just exploring'].map((w) => (
-                    <button
-                      key={w}
-                      onClick={() => setForm({ ...form, when: w })}
-                      type="button"
-                      style={{
-                        padding: '10px 18px',
-                        border: '1px solid',
-                        borderColor: form.when === w ? 'var(--green-deep)' : 'var(--rule)',
-                        background: form.when === w ? 'var(--green-deep)' : 'transparent',
-                        color: form.when === w ? 'var(--cream)' : 'var(--ink)',
-                        borderRadius: 100,
-                        fontSize: 13,
-                        cursor: 'pointer',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                    >
-                      {w}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="field">
-                <label>Anything else? (optional)</label>
-                <textarea
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Goals, injuries, life stage…"
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                <button onClick={() => setStep(1)} className="btn btn-ghost" disabled={sending}>
-                  ← Back
-                </button>
-                <button onClick={submit} className="btn btn-primary" style={{ flex: 1, opacity: sending ? 0.7 : 1 }} disabled={sending}>
-                  {sending ? 'Sending…' : 'Send enquiry'}
-                </button>
-              </div>
-            </div>
-          )}
-
-          {step === 3 && (
-            <div style={{ textAlign: 'center' }}>
-              <div style={{
-                width: 72,
-                height: 72,
-                borderRadius: '50%',
-                background: 'var(--blush-light)',
-                border: '1px solid var(--clay)',
-                color: 'var(--clay)',
-                fontFamily: 'var(--font-display)',
-                fontSize: 36,
-                fontStyle: 'italic',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 24px',
-              }}>
-                ✓
-              </div>
-              <h2 className="display-3" style={{ marginBottom: 12, fontSize: 36 }}>
-                Sent. <span className="italic" style={{ color: 'var(--clay)' }}>Thank you</span>.
-              </h2>
-              <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--ink-soft)', marginBottom: 28 }}>
-                Tanvi will get back to you within 24 hours with the next steps and a calendar link for your free intro call.
-              </p>
-              <button onClick={onClose} className="btn btn-outline">
-                Close
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Contact = ({ onEnquire }) => {
-  const [form, setForm] = React.useState({
-    name: '',
-    email: '',
-    phone: '',
-    interest: 'Swa-Shakti · Group strength',
-    message: '',
-  });
-  const [submitted, setSubmitted] = React.useState(false);
-  const [sending, setSending] = React.useState(false);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    setSending(true);
-    await sendEnquiry({
-      source: 'Contact Page',
-      from_name: form.name,
-      from_email: form.email,
-      phone: form.phone || '—',
-      interest: form.interest,
-      message: form.message || '—',
-      reply_to: form.email,
-    });
-    setSending(false);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: '', email: '', phone: '', interest: 'Swa-Shakti · Group strength', message: '' });
-    }, 4000);
-  };
-
-  return (
-    <main>
-      <section style={{ padding: '60px 0 40px' }}>
-        <div className="container">
+const Contact = ({ onEnquire }) => (
+  <main>
+    <section style={{ padding: '60px 0 80px' }}>
+      <div className="container">
+        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <span className="eyebrow">Get in touch</span>
-          <h1 className="display-1" style={{
-            fontStyle: 'italic',
-            marginTop: 20,
-            fontSize: 'clamp(40px, 8cqw, 130px)',
-            maxWidth: 1100,
-          }}>
-            Let's start a <span style={{ color: 'var(--clay)' }}>conversation</span>.
+          <h1 className="display-1" style={{ fontStyle: 'italic', marginTop: 20, fontSize: 'clamp(40px, 7cqw, 110px)' }}>
+            Let's <span style={{ color: 'var(--clay)' }}>talk</span>.
           </h1>
-          <p style={{
-            fontSize: 18,
-            color: 'var(--ink-soft)',
-            maxWidth: 600,
-            lineHeight: 1.65,
-            marginTop: 24,
-          }}>
-            Tell us what you're looking for. We'll send back a thoughtful plan within 24 hours — and the first 20-minute intro call is always free.
+          <p style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--ink-soft)', marginTop: 28 }}>
+            The fastest way to reach Tanvi is WhatsApp. She responds personally to every message.
           </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section style={{ padding: '40px 0 100px' }}>
-        <div className="container">
-          <div className="contact-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1.3fr 1fr',
-            gap: 56,
-          }}>
-            {/* Form */}
-            <div className="contact-form-card" style={{
-              background: 'var(--cream-light)',
-              border: '1px solid var(--rule)',
-              borderRadius: 'var(--radius-lg)',
-              padding: '48px',
-            }}>
-              {submitted ? (
-                <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-                  <div style={{
-                    width: 72,
-                    height: 72,
-                    borderRadius: '50%',
-                    background: 'var(--blush-light)',
-                    border: '1px solid var(--clay)',
-                    color: 'var(--clay)',
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 36,
-                    fontStyle: 'italic',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 24px',
-                  }}>
-                    ✓
-                  </div>
-                  <h2 className="display-3" style={{ marginBottom: 12 }}>
-                    Thank you, <span className="italic" style={{ color: 'var(--clay)' }}>truly</span>.
-                  </h2>
-                  <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--ink-soft)', maxWidth: 420, margin: '0 auto' }}>
-                    Tanvi will write back within 24 hours. Check your inbox — and your spam folder, just in case.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={submit}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 14,
-                    marginBottom: 32,
-                  }}>
-                    <span className="section-num">↳</span>
-                    <span className="eyebrow">Send an enquiry</span>
-                  </div>
+    <section style={{ paddingBottom: 80 }}>
+      <div className="container">
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, maxWidth: 900, margin: '0 auto' }}>
 
-                  <div className="contact-fields" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 24 }}>
-                    <div className="field">
-                      <label>Your name</label>
-                      <input
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        required
-                        placeholder="e.g. Anjali"
-                      />
-                    </div>
-                    <div className="field">
-                      <label>Phone</label>
-                      <input
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        type="tel"
-                        placeholder="+91 …"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="field" style={{ marginBottom: 24 }}>
-                    <label>Email</label>
-                    <input
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      type="email"
-                      required
-                      placeholder="you@example.com"
-                    />
-                  </div>
-
-                  <div className="field" style={{ marginBottom: 24 }}>
-                    <label>I'm interested in</label>
-                    <select
-                      value={form.interest}
-                      onChange={(e) => setForm({ ...form, interest: e.target.value })}
-                    >
-                      {PROGRAMS.map((p) => (
-                        <option key={p.id}>{p.name.replace('The ', '').replace(' Edit', '')} · {p.sub}</option>
-                      ))}
-                      <option>Not sure yet — let's talk</option>
-                    </select>
-                  </div>
-
-                  <div className="field" style={{ marginBottom: 32 }}>
-                    <label>A note (optional)</label>
-                    <textarea
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="What are you hoping to work on? Any injuries or considerations?"
-                    />
-                  </div>
-
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    gap: 16,
-                  }}>
-                    <span className="mono" style={{ fontSize: 11, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>
-                      We respond within 24 hrs
-                    </span>
-                    <button type="submit" className="btn btn-primary" disabled={sending} style={{ opacity: sending ? 0.7 : 1 }}>
-                      {sending ? 'Sending…' : 'Send enquiry →'}
-                    </button>
-                  </div>
-                </form>
-              )}
+          {/* WhatsApp — primary */}
+          <a
+            href={WA_URL}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              gridColumn: '1 / -1',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 24,
+              padding: '40px 44px',
+              background: '#25D366',
+              borderRadius: 'var(--radius-md)',
+              textDecoration: 'none',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(37,211,102,0.35)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+          >
+            <div style={{ background: 'rgba(255,255,255,0.2)', borderRadius: '50%', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fff' }}>
+              <WaIcon size={32} />
             </div>
-
-            {/* Side info */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <ContactCard
-                label="Phone / WhatsApp"
-                title="99230 86478"
-                sub="Mon–Sat · 9 AM – 7 PM"
-                cta="Call now"
-                href="tel:9923086478"
-              />
-              <ContactCard
-                label="Instagram"
-                title="@swaswasthya"
-                sub="Daily practice, reels, community moments"
-                cta="Follow"
-                href="https://instagram.com/swaswasthya"
-              />
-              <ContactCard
-                label="Studio · Offline"
-                title="Pune, Maharashtra"
-                sub="Exact location shared on confirmation"
-                cta="Get directions"
-                href="#"
-              />
-              <ContactCard
-                label="Email"
-                title="hello@swaswasthya.in"
-                sub="For collaborations & longer notes"
-                cta="Write to us"
-                href="mailto:hello@swaswasthya.in"
-                dark
-              />
-            </div>
-          </div>
-
-          <style>{`
-            @container site (max-width: 900px) {
-              .contact-grid { grid-template-columns: 1fr !important; }
-            }
-            @container site (max-width: 520px) {
-              .contact-fields { grid-template-columns: 1fr !important; }
-            }
-          `}</style>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section" style={{ background: 'var(--cream-light)', borderTop: '1px solid var(--rule)' }}>
-        <div className="container">
-          <div className="faq-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1.4fr',
-            gap: 64,
-          }}>
             <div>
-              <SectionLabel num="·">Common questions</SectionLabel>
-              <h2 className="display-2">
-                Before you <span className="italic" style={{ color: 'var(--clay)' }}>write to us</span>.
-              </h2>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>Fastest response · WhatsApp</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 28, color: '#fff' }}>+91 96371 42820</div>
             </div>
-            <FAQList />
-          </div>
+            <div style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.85)' }}>
+              Message now →
+            </div>
+          </a>
+
+          <ContactItem label="Call us" value="+91 99230 86478" href="tel:9923086478" />
+          <ContactItem label="Email" value="swaswasthya@gmail.com" href="mailto:swaswasthya@gmail.com" />
+          <ContactItem label="Instagram" value="@swaswasthya" href="https://instagram.com/swaswasthya" />
         </div>
+      </div>
 
-        <style>{`
-          @container site (max-width: 900px) {
-            .faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-          }
-        `}</style>
-      </section>
+      <style>{`
+        @container site (max-width: 700px) {
+          .contact-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
 
-      {/* Map / Location placeholder */}
-      <section style={{ padding: 0 }}>
-        <ImgPh label="map · pune studio location" height={420} radius="0" />
-      </section>
-    </main>
-  );
-};
+    <section className="section" style={{ background: 'var(--cream-light)', borderBlock: '1px solid var(--rule)' }}>
+      <div className="container" style={{ maxWidth: 720, margin: '0 auto' }}>
+        <SectionLabel num="01">Where to find us</SectionLabel>
+        <h2 className="display-2" style={{ marginBottom: 32 }}>
+          Pune, India · <span className="italic" style={{ color: 'var(--clay)' }}>Online worldwide</span>.
+        </h2>
+        <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--ink-soft)', maxWidth: 560 }}>
+          In-person sessions run in Pune. Online sessions are available for women anywhere in the world — same practice, same Tanvi, same results.
+        </p>
+      </div>
+    </section>
+
+    <HomeFinalCTA onEnquire={onEnquire} />
+  </main>
+);
 
 export default Contact;

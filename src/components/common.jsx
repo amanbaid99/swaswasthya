@@ -1,5 +1,11 @@
 import React from 'react';
 
+const WaIcon = ({ color = 'currentColor', size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color} style={{ flexShrink: 0 }}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
+
 export const Wordmark = ({ size = 'md', oneline = false }) => {
   const sizeMap = {
     sm: { fs: '16px', ls: '0.06em' },
@@ -128,9 +134,9 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
           <a href="tel:9923086478" className="btn btn-ghost btn-sm nav-phone" style={{ display: 'inline-flex' }}>
             ☎ 99230 86478
           </a>
-          <button className="btn btn-primary btn-sm" onClick={onEnquire}>
-            Enquire
-          </button>
+          <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
+            <WaIcon /> WhatsApp
+          </a>
           <button
             onClick={toggleDark}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -188,9 +194,9 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
           </nav>
 
           <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 24 }}>
-            <button className="btn btn-primary" onClick={() => { setMobileOpen(false); onEnquire(); }} style={{ width: '100%' }}>
-              Book a free intro session
-            </button>
+            <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer" className="btn btn-primary" onClick={() => setMobileOpen(false)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, textDecoration: 'none' }}>
+              <WaIcon /> WhatsApp us
+            </a>
             <a href="tel:9923086478" className="btn btn-outline" style={{ width: '100%' }}>
               ☎ Call 99230 86478
             </a>
@@ -298,7 +304,8 @@ export const Footer = ({ setPage, onEnquire }) => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14, color: 'rgba(240, 229, 207, 0.85)' }}>
             <a href="tel:9923086478">+91 99230 86478</a>
             <a href="https://instagram.com/swaswasthya" target="_blank" rel="noreferrer">@swaswasthya</a>
-            <a onClick={onEnquire} style={{ cursor: 'pointer' }}>Send an enquiry</a>
+            <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer">WhatsApp us</a>
+            <a href="mailto:swaswasthya@gmail.com">swaswasthya@gmail.com</a>
           </div>
         </div>
 
@@ -434,21 +441,26 @@ export const HomeFinalCTA = ({ onEnquire }) => (
         margin: '0 auto 40px',
         lineHeight: 1.6,
       }}>
-        A 20-minute intro call. Whatever you choose afterwards is up to you.
+        Drop us a message and Tanvi will get back to you personally.
       </p>
       <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-        <button onClick={onEnquire} className="btn btn-primary" style={{
+        <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer" className="btn btn-primary" style={{
           background: 'var(--cream)',
           color: 'var(--green-deep)',
           borderColor: 'var(--cream)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          textDecoration: 'none',
         }}>
-          Book your intro session
-        </button>
-        <a href="https://wa.me/919923086478" className="btn btn-outline" style={{
+          <WaIcon color="var(--green-deep)" /> WhatsApp Tanvi
+        </a>
+        <a href="mailto:swaswasthya@gmail.com" className="btn btn-outline" style={{
           borderColor: 'var(--cream)',
           color: 'var(--cream)',
+          textDecoration: 'none',
         }}>
-          WhatsApp us
+          Email us
         </a>
       </div>
     </div>

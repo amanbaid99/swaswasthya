@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Nav, Footer } from './components/common.jsx';
-import { EnquiryModal } from './pages/Contact.jsx';
-import { PROGRAMS } from './data/programs.js';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Programs from './pages/Programs.jsx';
@@ -12,13 +10,15 @@ import Calculator from './pages/Calculator.jsx';
 import Admin from './pages/Admin.jsx';
 import Blog from './pages/Blog.jsx';
 
+const WA_URL = 'https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs.';
+const onEnquire = () => window.open(WA_URL, '_blank');
+
 function SiteInner() {
   const navigate = useNavigate();
   const [isDark, setIsDark] = React.useState(() => {
     try { return localStorage.getItem('swa-dark') === 'true'; } catch (e) { return false; }
   });
   const [activeProgramId, setActiveProgramId] = React.useState(null);
-  const [enquiryOpen, setEnquiryOpen] = React.useState(false);
 
   const toggleDark = React.useCallback(() => {
     setIsDark((d) => {
@@ -31,8 +31,6 @@ function SiteInner() {
   React.useEffect(() => {
     document.documentElement.dataset.palette = isDark ? 'dark' : 'boutique';
   }, [isDark]);
-
-  const onEnquire = () => setEnquiryOpen(true);
 
   const navigatePage = (id) => {
     if (id === 'home') navigate('/');
@@ -63,11 +61,6 @@ function SiteInner() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer setPage={navigatePage} onEnquire={onEnquire} />
-      <EnquiryModal
-        open={enquiryOpen}
-        onClose={() => setEnquiryOpen(false)}
-        initialProgram={activeProgramId ? PROGRAMS.find((p) => p.id === activeProgramId)?.name : null}
-      />
     </div>
   );
 }
