@@ -139,6 +139,21 @@ const PostForm = ({ post, onSave, onCancel }) => {
     });
   };
 
+  const applyColor = (color) => {
+    const ta = contentRef.current;
+    if (!ta) return;
+    const { selectionStart: s, selectionEnd: e, value } = ta;
+    const selected = value.slice(s, e) || 'text';
+    const before = `<span style="color:${color}">`;
+    const after = '</span>';
+    const next = value.slice(0, s) + before + selected + after + value.slice(e);
+    set('content', next);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.setSelectionRange(s + before.length, s + before.length + selected.length);
+    });
+  };
+
   const insertLink = () => {
     const url = window.prompt('Link URL:', 'https://');
     if (!url) return;
@@ -259,6 +274,29 @@ const PostForm = ({ post, onSave, onCancel }) => {
             <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix('> ')}>Quote</button>
             <button type="button" style={TOOLBAR_BTN} onClick={insertLink}>Link</button>
             <button type="button" style={{ ...TOOLBAR_BTN, background: '#1a2e1a', color: '#fff', borderColor: '#1a2e1a' }} onClick={() => setShowImageModal(true)}>+ Image</button>
+            <span style={{ width: 1, background: '#d4c9b5', alignSelf: 'stretch', margin: '0 4px' }} />
+            {[
+              { color: '#b87059', label: 'Clay' },
+              { color: '#1a2e1a', label: 'Dark green' },
+              { color: '#4a7c59', label: 'Green' },
+              { color: '#c8973f', label: 'Gold' },
+              { color: '#c9837d', label: 'Rose' },
+              { color: '#5a7ab5', label: 'Blue' },
+              { color: '#888', label: 'Grey' },
+            ].map(({ color, label }) => (
+              <button
+                key={color}
+                type="button"
+                title={`Color: ${label}`}
+                onClick={() => applyColor(color)}
+                style={{
+                  width: 24, height: 24, borderRadius: '50%',
+                  background: color, border: '2px solid #fff',
+                  boxShadow: '0 0 0 1px #d4c9b5',
+                  cursor: 'pointer', flexShrink: 0, padding: 0,
+                }}
+              />
+            ))}
           </div>
           <textarea
             ref={contentRef}

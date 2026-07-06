@@ -191,7 +191,7 @@ const BlogPost = ({ onEnquire }) => {
         .blog-content h1 { font-size: 2em; }
         .blog-content h2 { font-size: 1.5em; }
         .blog-content h3 { font-size: 1.2em; }
-        .blog-content strong { font-weight: 600; color: var(--green-deep); }
+        .blog-content strong { font-weight: 600; }
         .blog-content em { font-style: italic; }
         .blog-content ul, .blog-content ol { padding-left: 1.5em; margin-bottom: 1.4em; }
         .blog-content li { margin-bottom: 0.4em; }
