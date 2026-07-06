@@ -17,8 +17,6 @@ function SiteInner() {
   const [isDark, setIsDark] = React.useState(() => {
     try { return localStorage.getItem('swa-dark') === 'true'; } catch (e) { return false; }
   });
-  const [activeProgramId, setActiveProgramId] = React.useState(null);
-
   const toggleDark = React.useCallback(() => {
     setIsDark((d) => {
       const next = !d;
@@ -37,21 +35,16 @@ function SiteInner() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const openProgram = (id) => {
-    setActiveProgramId(id);
-    navigate('/programs');
-    window.scrollTo(0, 0);
-  };
-
   const currentPage = window.location.pathname === '/' ? 'home' : window.location.pathname.slice(1).split('/')[0];
 
   return (
     <div className="site-shell">
       <Nav page={currentPage} setPage={navigatePage} onEnquire={onEnquire} isDark={isDark} toggleDark={toggleDark} />
       <Routes>
-        <Route path="/" element={<Home setPage={navigatePage} onEnquire={onEnquire} onOpenProgram={openProgram} />} />
+        <Route path="/" element={<Home setPage={navigatePage} onEnquire={onEnquire} onOpenProgram={(id) => { navigate('/programs/' + id); window.scrollTo(0, 0); }} />} />
         <Route path="/about" element={<About setPage={navigatePage} onEnquire={onEnquire} />} />
-        <Route path="/programs" element={<Programs activeId={activeProgramId} setActiveId={setActiveProgramId} onEnquire={onEnquire} setPage={navigatePage} />} />
+        <Route path="/programs" element={<Programs onEnquire={onEnquire} setPage={navigatePage} />} />
+        <Route path="/programs/:id" element={<Programs onEnquire={onEnquire} setPage={navigatePage} />} />
         <Route path="/contact" element={<Contact onEnquire={onEnquire} />} />
         <Route path="/calculator" element={<Calculator onEnquire={onEnquire} setPage={navigatePage} />} />
         <Route path="/blog" element={<Blog onEnquire={onEnquire} />} />

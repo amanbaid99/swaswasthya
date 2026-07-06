@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PROGRAMS } from '../data/programs.js';
 import { ImgPh, SectionLabel, HomeFinalCTA } from '../components/common.jsx';
 
@@ -77,11 +78,11 @@ const ProgramRow = ({ p, index, onOpen }) => {
             <Meta label="Duration" value={p.duration} />
             <Meta label="Format" value={p.format} />
           </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <span className="btn btn-primary btn-sm">Read more →</span>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', justifyContent: 'space-between' }}>
             <span className="mono" style={{ fontSize: 11, letterSpacing: '0.12em', color: 'var(--clay)' }}>
               {p.pricing}
             </span>
+            <span className="btn btn-primary btn-sm">Read more →</span>
           </div>
         </div>
       </div>
@@ -97,11 +98,13 @@ const ProgramRow = ({ p, index, onOpen }) => {
   );
 };
 
-const ProgramDetail = ({ p, onBack, onEnquire }) => (
+const ProgramDetail = ({ p, onEnquire }) => {
+  const navigate = useNavigate();
+  return (
   <main>
     <section style={{ padding: '40px 0 32px' }}>
       <div className="container">
-        <button onClick={onBack} className="btn btn-ghost btn-sm" style={{ marginBottom: 32 }}>
+        <button onClick={() => navigate('/programs')} className="btn btn-ghost btn-sm" style={{ marginBottom: 32 }}>
           ← All programs
         </button>
 
@@ -408,9 +411,11 @@ const ProgramDetail = ({ p, onBack, onEnquire }) => (
       </div>
     </section>
   </main>
-);
+  );
+};
 
-const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
+const ProgramsIndex = ({ onEnquire, setPage }) => {
+  const navigate = useNavigate();
   const [filter, setFilter] = React.useState('All');
   const filters = ['All', 'Group', 'Personal', 'Capsule'];
   const filtered = PROGRAMS.filter((p) => {
@@ -468,7 +473,7 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
         <div className="container">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             {filtered.map((p, i) => (
-              <ProgramRow key={p.id} p={p} index={i} onOpen={() => setActiveId(p.id)} />
+              <ProgramRow key={p.id} p={p} index={i} onOpen={() => { navigate('/programs/' + p.id); window.scrollTo(0, 0); }} />
             ))}
             {filtered.length === 0 && (
               <div style={{ textAlign: 'center', padding: '80px 0', color: 'var(--ink-soft)' }}>
@@ -541,7 +546,7 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
                       {p.tag.includes('Online') ? 'Online · Offline' : 'Capsule'}
                     </td>
                     <td style={{ padding: '20px', verticalAlign: 'top', textAlign: 'right' }}>
-                      <button onClick={() => setActiveId(p.id)} className="btn btn-ghost btn-sm">
+                      <button onClick={() => { navigate('/programs/' + p.id); window.scrollTo(0, 0); }} className="btn btn-ghost btn-sm">
                         View →
                       </button>
                     </td>
@@ -558,12 +563,13 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
   );
 };
 
-const Programs = ({ activeId, setActiveId, onEnquire, setPage }) => {
-  if (activeId) {
-    const p = PROGRAMS.find((x) => x.id === activeId);
-    if (p) return <ProgramDetail p={p} onBack={() => setActiveId(null)} onEnquire={onEnquire} />;
+const Programs = ({ onEnquire, setPage }) => {
+  const { id } = useParams();
+  if (id) {
+    const p = PROGRAMS.find((x) => x.id === id);
+    if (p) return <ProgramDetail p={p} onEnquire={onEnquire} />;
   }
-  return <ProgramsIndex setActiveId={setActiveId} onEnquire={onEnquire} setPage={setPage} />;
+  return <ProgramsIndex onEnquire={onEnquire} setPage={setPage} />;
 };
 
 export default Programs;
