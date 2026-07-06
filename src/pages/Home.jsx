@@ -33,7 +33,7 @@ const HomeHero = ({ onEnquire, setPage }) => (
         }}>
           Balanced Fitness · Mind &amp; Body · Est. 2007
         </div>
-        <span className="eyebrow">For the woman you were, are, and are becoming</span>
+        <span className="eyebrow" style={{ fontSize: 7 }}>For the woman you were, are, and are becoming</span>
       </div>
 
       {/* Full-width founder image */}
