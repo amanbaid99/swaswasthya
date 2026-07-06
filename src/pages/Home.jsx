@@ -478,32 +478,6 @@ const HomeTestimonials = () => (
   </section>
 );
 
-const HomePress = () => (
-  <section className="section-sm" style={{ borderBlock: '1px solid var(--rule)' }}>
-    <div className="container">
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 40,
-        flexWrap: 'wrap',
-      }}>
-        <span className="eyebrow">As felt by</span>
-        {['Femina', 'Vogue India', 'YogaJournal', 'TheBetterIndia', 'HerCircle'].map((n) => (
-          <span key={n} style={{
-            fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
-            fontSize: 22,
-            color: 'var(--ink-soft)',
-            opacity: 0.7,
-          }}>
-            {n}
-          </span>
-        ))}
-      </div>
-    </div>
-  </section>
-);
 
 const HomeBlog = () => {
   const navigate = useNavigate();
@@ -583,7 +557,6 @@ const Home = ({ setPage, onEnquire, onOpenProgram }) => (
     <HomeSchedulePreview setPage={setPage} />
     <HomeTestimonials />
     <HomeBlog />
-    <HomePress />
     <HomeFinalCTA onEnquire={onEnquire} />
   </main>
 );
