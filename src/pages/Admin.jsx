@@ -156,8 +156,15 @@ const PostForm = ({ post, onSave, onCancel }) => {
         </div>
 
         <div style={fieldStyle}>
-          <label style={S.label}>Content</label>
-          <textarea style={{ ...S.input, height: 300, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }} value={form.content} onChange={(e) => set('content', e.target.value)} />
+          <label style={S.label}>Content <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#9a9a8a' }}>(Markdown supported)</span></label>
+          <textarea style={{ ...S.input, height: 360, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }} value={form.content} onChange={(e) => set('content', e.target.value)} placeholder="Write your post here...&#10;&#10;## Add a heading&#10;&#10;Regular paragraph text.&#10;&#10;**Bold text** and *italic text*&#10;&#10;Add an image:&#10;![Image description](https://your-image-url.jpg)&#10;&#10;- Bullet point&#10;- Another point" />
+          <div style={{ fontSize: 11, color: '#9a9a8a', lineHeight: 1.6, marginTop: 4 }}>
+            <strong>Images:</strong> <code>![description](https://image-url.jpg)</code> &nbsp;·&nbsp;
+            <strong>Heading:</strong> <code>## Heading</code> &nbsp;·&nbsp;
+            <strong>Bold:</strong> <code>**text**</code> &nbsp;·&nbsp;
+            <strong>Italic:</strong> <code>*text*</code> &nbsp;·&nbsp;
+            <strong>Quote:</strong> <code>&gt; text</code>
+          </div>
         </div>
 
         <div style={{ ...S.row, justifyContent: 'space-between', paddingTop: 8, borderTop: '1px solid #e8e2d8' }}>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { marked } from 'marked';
 import { supabase } from '../lib/supabase.js';
 import { ImgPh, SectionLabel, HomeFinalCTA } from '../components/common.jsx';
+
+marked.setOptions({ breaks: true, gfm: true });
 
 const fmtDate = (ts) => ts
   ? new Date(ts).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -151,11 +154,40 @@ const BlogPost = ({ onEnquire }) => {
 
       <section style={{ paddingBottom: 80 }}>
         <div className="container" style={{ maxWidth: 780 }}>
-          <div style={{ fontSize: 17, lineHeight: 1.8, color: 'var(--ink)', whiteSpace: 'pre-wrap' }}>
-            {post.content}
-          </div>
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: marked(post.content || '') }}
+          />
         </div>
       </section>
+
+      <style>{`
+        .blog-content { font-size: 17px; line-height: 1.85; color: var(--ink); }
+        .blog-content p { margin-bottom: 1.4em; }
+        .blog-content h1, .blog-content h2, .blog-content h3 {
+          font-family: var(--font-display); font-style: italic;
+          color: var(--green-deep); line-height: 1.25; margin: 2em 0 0.6em;
+        }
+        .blog-content h1 { font-size: 2em; }
+        .blog-content h2 { font-size: 1.5em; }
+        .blog-content h3 { font-size: 1.2em; }
+        .blog-content strong { font-weight: 600; color: var(--green-deep); }
+        .blog-content em { font-style: italic; }
+        .blog-content ul, .blog-content ol { padding-left: 1.5em; margin-bottom: 1.4em; }
+        .blog-content li { margin-bottom: 0.4em; }
+        .blog-content img {
+          width: 100%; border-radius: var(--radius-md);
+          margin: 2em 0; display: block; object-fit: cover;
+        }
+        .blog-content blockquote {
+          border-left: 3px solid var(--clay); margin: 2em 0;
+          padding: 16px 24px; background: var(--cream-light);
+          border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+          font-style: italic; color: var(--ink-soft);
+        }
+        .blog-content hr { border: none; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+        .blog-content a { color: var(--clay); text-decoration: underline; }
+      `}</style>
 
       <HomeFinalCTA onEnquire={onEnquire} />
     </main>
