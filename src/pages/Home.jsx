@@ -548,6 +548,44 @@ const HomeBlog = () => {
   );
 };
 
+const HomeCalculatorNudge = ({ setPage }) => (
+  <section style={{ background: 'var(--tan)', borderBlock: '1px solid var(--rule)', padding: '64px 0' }}>
+    <div className="container">
+      <div className="calc-nudge" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }}>
+        <div>
+          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--green-soft)' }}>
+            Free tool · 30 seconds
+          </span>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 'clamp(28px, 4cqw, 52px)', color: 'var(--green-deep)', lineHeight: 1.2, margin: '12px 0 16px' }}>
+            Do you know your numbers?
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', maxWidth: 520 }}>
+            Your daily calorie target, ideal BMI range, and protein needs — calculated to your body, age, and goals. A good place to start before anything else.
+          </p>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-end' }}>
+          <button
+            className="btn btn-primary"
+            onClick={() => { setPage('calculator'); }}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            Calculate mine →
+          </button>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)', textAlign: 'right' }}>
+            BMI · Calories · Protein
+          </span>
+        </div>
+      </div>
+    </div>
+    <style>{`
+      @container site (max-width: 640px) {
+        .calc-nudge { grid-template-columns: 1fr !important; gap: 24px !important; }
+        .calc-nudge > div:last-child { align-items: flex-start !important; }
+      }
+    `}</style>
+  </section>
+);
+
 const Home = ({ setPage, onEnquire, onOpenProgram }) => (
   <main>
     <HomeHero setPage={setPage} onEnquire={onEnquire} />
@@ -556,6 +594,7 @@ const Home = ({ setPage, onEnquire, onOpenProgram }) => (
     <HomePrograms onOpenProgram={onOpenProgram} setPage={setPage} />
     <HomeSchedulePreview setPage={setPage} />
     <HomeTestimonials />
+    <HomeCalculatorNudge setPage={setPage} />
     <HomeBlog />
     <HomeFinalCTA onEnquire={onEnquire} />
   </main>
