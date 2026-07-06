@@ -1,5 +1,6 @@
 import React from 'react';
 import { supabase } from '../lib/supabase.js';
+import ImageEditorModal from '../components/ImageEditorModal.jsx';
 
 /* ─── helpers ─── */
 const slugify = (str) =>
@@ -75,6 +76,8 @@ const Login = ({ onLogin }) => {
 };
 
 /* ─── Post Form ─── */
+const TOOLBAR_BTN = { padding: '6px 12px', fontSize: 13, border: '1px solid #d4c9b5', background: '#fff', borderRadius: 6, cursor: 'pointer', color: '#1a2e1a' };
+
 const PostForm = ({ post, onSave, onCancel }) => {
   const isNew = !post?.id;
   const [form, setForm] = React.useState({
@@ -84,16 +87,84 @@ const PostForm = ({ post, onSave, onCancel }) => {
     excerpt: post?.excerpt || '',
     content: post?.content || '',
     image_url: post?.image_url || '',
+    image_blur: post?.image_blur || '',
     published: post?.published || false,
   });
   const [saving, setSaving] = React.useState(false);
   const [error, setError] = React.useState('');
+  const [showImageModal, setShowImageModal] = React.useState(false);
+  const [showCoverModal, setShowCoverModal] = React.useState(false);
+  const [showCoverUrlInput, setShowCoverUrlInput] = React.useState(false);
+  const contentRef = React.useRef(null);
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleTitleChange = (v) => {
     set('title', v);
     if (isNew) set('slug', slugify(v));
+  };
+
+  // Wraps the current textarea selection with `before`/`after` (e.g. ** for bold).
+  const applyWrap = (before, after = before) => {
+    const ta = contentRef.current;
+    if (!ta) return;
+    const { selectionStart: s, selectionEnd: e, value } = ta;
+    const selected = value.slice(s, e) || 'text';
+    const next = value.slice(0, s) + before + selected + after + value.slice(e);
+    set('content', next);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.setSelectionRange(s + before.length, s + before.length + selected.length);
+    });
+  };
+
+  // Prefixes every line touched by the current selection (e.g. "## " for a heading,
+  // "- " for a bullet list). `prefix` can be a string or (line, index) => string.
+  const applyLinePrefix = (prefix) => {
+    const ta = contentRef.current;
+    if (!ta) return;
+    const { selectionStart: s, selectionEnd: e, value } = ta;
+    const lineStart = value.lastIndexOf('\n', s - 1) + 1;
+    let lineEnd = value.indexOf('\n', e);
+    if (lineEnd === -1) lineEnd = value.length;
+    const block = value.slice(lineStart, lineEnd) || 'text';
+    const newBlock = block.split('\n')
+      .map((l, i) => (typeof prefix === 'function' ? prefix(l, i) : prefix + l))
+      .join('\n');
+    const next = value.slice(0, lineStart) + newBlock + value.slice(lineEnd);
+    set('content', next);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.setSelectionRange(lineStart, lineStart + newBlock.length);
+    });
+  };
+
+  const insertLink = () => {
+    const url = window.prompt('Link URL:', 'https://');
+    if (!url) return;
+    applyWrap('[', `](${url})`);
+  };
+
+  const insertContentImage = ({ url, blurDataUrl, width, align }) => {
+    const sizeClass = width <= 480 ? 'size-small' : width <= 900 ? 'size-medium' : 'size-large';
+    const snippet = `\n<span class="blog-lazy-img ${sizeClass} align-${align}" style="background-image:url('${blurDataUrl}')"><img src="${url}" alt="" loading="lazy" decoding="async" /></span>\n`;
+    const ta = contentRef.current;
+    const s = ta ? ta.selectionStart : form.content.length;
+    const next = form.content.slice(0, s) + snippet + form.content.slice(s);
+    set('content', next);
+    setShowImageModal(false);
+    requestAnimationFrame(() => {
+      if (!ta) return;
+      ta.focus();
+      const pos = s + snippet.length;
+      ta.setSelectionRange(pos, pos);
+    });
+  };
+
+  const insertCoverImage = ({ url, blurDataUrl }) => {
+    set('image_url', url);
+    set('image_blur', blurDataUrl);
+    setShowCoverModal(false);
   };
 
   const submit = async (e) => {
@@ -145,8 +216,29 @@ const PostForm = ({ post, onSave, onCancel }) => {
             </select>
           </div>
           <div style={fieldStyle}>
-            <label style={S.label}>Cover Image URL</label>
-            <input style={S.input} value={form.image_url} onChange={(e) => set('image_url', e.target.value)} placeholder="https://..." />
+            <label style={S.label}>Cover image</label>
+            {form.image_url && (
+              <img src={form.image_url} alt="" style={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }} />
+            )}
+            <div style={{ ...S.row, gap: 8 }}>
+              <button type="button" style={{ ...S.btn, ...S.btnSm, ...S.btnGhost }} onClick={() => setShowCoverModal(true)}>
+                {form.image_url ? 'Change image' : 'Upload image'}
+              </button>
+              {form.image_url && (
+                <button type="button" style={{ ...S.btn, ...S.btnSm, ...S.btnGhost }} onClick={() => { set('image_url', ''); set('image_blur', ''); }}>Remove</button>
+              )}
+              <button type="button" style={{ ...S.btn, ...S.btnSm, background: 'transparent', border: 'none', color: '#9a9a8a', textDecoration: 'underline' }} onClick={() => setShowCoverUrlInput((v) => !v)}>
+                or paste a URL
+              </button>
+            </div>
+            {showCoverUrlInput && (
+              <input
+                style={{ ...S.input, marginTop: 8 }}
+                value={form.image_url}
+                onChange={(e) => { set('image_url', e.target.value); set('image_blur', ''); }}
+                placeholder="https://..."
+              />
+            )}
           </div>
         </div>
 
@@ -157,15 +249,32 @@ const PostForm = ({ post, onSave, onCancel }) => {
 
         <div style={fieldStyle}>
           <label style={S.label}>Content <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#9a9a8a' }}>(Markdown supported)</span></label>
-          <textarea style={{ ...S.input, height: 360, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }} value={form.content} onChange={(e) => set('content', e.target.value)} placeholder="Write your post here...&#10;&#10;## Add a heading&#10;&#10;Regular paragraph text.&#10;&#10;**Bold text** and *italic text*&#10;&#10;Add an image:&#10;![Image description](https://your-image-url.jpg)&#10;&#10;- Bullet point&#10;- Another point" />
-          <div style={{ fontSize: 11, color: '#9a9a8a', lineHeight: 1.6, marginTop: 4 }}>
-            <strong>Images:</strong> <code>![description](https://image-url.jpg)</code> &nbsp;·&nbsp;
-            <strong>Heading:</strong> <code>## Heading</code> &nbsp;·&nbsp;
-            <strong>Bold:</strong> <code>**text**</code> &nbsp;·&nbsp;
-            <strong>Italic:</strong> <code>*text*</code> &nbsp;·&nbsp;
-            <strong>Quote:</strong> <code>&gt; text</code>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix('## ')}>H2</button>
+            <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix('### ')}>H3</button>
+            <button type="button" style={{ ...TOOLBAR_BTN, fontWeight: 700 }} onClick={() => applyWrap('**')}>B</button>
+            <button type="button" style={{ ...TOOLBAR_BTN, fontStyle: 'italic' }} onClick={() => applyWrap('*')}>I</button>
+            <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix('- ')}>• List</button>
+            <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix((l, i) => `${i + 1}. ${l}`)}>1. List</button>
+            <button type="button" style={TOOLBAR_BTN} onClick={() => applyLinePrefix('> ')}>Quote</button>
+            <button type="button" style={TOOLBAR_BTN} onClick={insertLink}>Link</button>
+            <button type="button" style={{ ...TOOLBAR_BTN, background: '#1a2e1a', color: '#fff', borderColor: '#1a2e1a' }} onClick={() => setShowImageModal(true)}>+ Image</button>
           </div>
+          <textarea
+            ref={contentRef}
+            style={{ ...S.input, height: 360, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }}
+            value={form.content}
+            onChange={(e) => set('content', e.target.value)}
+            placeholder="Write your post here...&#10;&#10;## Add a heading&#10;&#10;Regular paragraph text.&#10;&#10;**Bold text** and *italic text*&#10;&#10;Add an image using the toolbar above, or paste one manually:&#10;![Image description](https://your-image-url.jpg)&#10;&#10;- Bullet point&#10;- Another point"
+          />
         </div>
+
+        {showImageModal && (
+          <ImageEditorModal mode="content" onInsert={insertContentImage} onClose={() => setShowImageModal(false)} />
+        )}
+        {showCoverModal && (
+          <ImageEditorModal mode="cover" onInsert={insertCoverImage} onClose={() => setShowCoverModal(false)} />
+        )}
 
         <div style={{ ...S.row, justifyContent: 'space-between', paddingTop: 8, borderTop: '1px solid #e8e2d8' }}>
           <label style={{ ...S.row, cursor: 'pointer', gap: 10, userSelect: 'none' }}>

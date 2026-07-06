@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { marked } from 'marked';
 import { supabase } from '../lib/supabase.js';
-import { ImgPh, SectionLabel, HomeFinalCTA } from '../components/common.jsx';
+import { ImgPh, SectionLabel, HomeFinalCTA, LazyImage } from '../components/common.jsx';
 
 marked.setOptions({ breaks: true, gfm: true });
 
@@ -20,7 +20,7 @@ const BlogList = ({ onEnquire }) => {
     if (!supabase) { setLoading(false); return; }
     supabase
       .from('blogs')
-      .select('id, title, slug, category, excerpt, image_url, published_at')
+      .select('*')
       .eq('published', true)
       .order('published_at', { ascending: false })
       .then(({ data }) => { setPosts(data || []); setLoading(false); });
@@ -55,7 +55,7 @@ const BlogList = ({ onEnquire }) => {
                   style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', background: 'var(--cream-light)' }}
                 >
                   {post.image_url
-                    ? <img src={post.image_url} alt={post.title} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+                    ? <LazyImage src={post.image_url} blurSrc={post.image_blur} alt={post.title} style={{ height: 220 }} />
                     : <ImgPh label={post.category} height={220} radius="0" />
                   }
                   <div style={{ padding: '24px 28px 28px' }}>
@@ -95,6 +95,7 @@ const BlogPost = ({ onEnquire }) => {
   const navigate = useNavigate();
   const [post, setPost] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const contentRef = React.useRef(null);
 
   React.useEffect(() => {
     if (!supabase) { setLoading(false); return; }
@@ -106,6 +107,19 @@ const BlogPost = ({ onEnquire }) => {
       .single()
       .then(({ data }) => { setPost(data); setLoading(false); });
   }, [slug]);
+
+  // Blur-up for images embedded in the post body: each is wrapped in a
+  // .blog-lazy-img span with a blurred data-URI background, and the inner
+  // <img> fades in once it's actually loaded.
+  React.useEffect(() => {
+    const node = contentRef.current;
+    if (!node) return;
+    const imgs = node.querySelectorAll('.blog-lazy-img img');
+    imgs.forEach((img) => {
+      if (img.complete) img.classList.add('is-loaded');
+      else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+    });
+  }, [post]);
 
   if (loading) return <main style={{ padding: '120px 0', textAlign: 'center', color: 'var(--ink-soft)' }}>Loading…</main>;
   if (!post) return (
@@ -147,7 +161,12 @@ const BlogPost = ({ onEnquire }) => {
       {post.image_url && (
         <section style={{ padding: '0 0 48px' }}>
           <div className="container">
-            <img src={post.image_url} alt={post.title} style={{ width: '100%', maxHeight: 520, objectFit: 'cover', borderRadius: 'var(--radius-lg)', display: 'block' }} />
+            <LazyImage
+              src={post.image_url}
+              blurSrc={post.image_blur}
+              alt={post.title}
+              style={{ height: 520, borderRadius: 'var(--radius-lg)' }}
+            />
           </div>
         </section>
       )}
@@ -155,6 +174,7 @@ const BlogPost = ({ onEnquire }) => {
       <section style={{ paddingBottom: 80 }}>
         <div className="container" style={{ maxWidth: 780 }}>
           <div
+            ref={contentRef}
             className="blog-content"
             dangerouslySetInnerHTML={{ __html: marked(post.content || '') }}
           />
@@ -179,6 +199,31 @@ const BlogPost = ({ onEnquire }) => {
           width: 100%; border-radius: var(--radius-md);
           margin: 2em 0; display: block; object-fit: cover;
         }
+        /* Blur-up wrapper for images inserted via the admin image tool: the
+           span shows a blurred placeholder immediately, the real <img> fades
+           in on top once it finishes loading. */
+        .blog-content .blog-lazy-img {
+          display: block; position: relative; overflow: hidden;
+          border-radius: var(--radius-md); margin: 2em 0;
+          background-size: cover; background-position: center;
+        }
+        .blog-content .blog-lazy-img img {
+          width: 100%; height: 100%; display: block; object-fit: cover;
+          margin: 0; border-radius: 0;
+          opacity: 0; transition: opacity 0.5s ease;
+        }
+        .blog-content .blog-lazy-img img.is-loaded { opacity: 1; }
+        .blog-content .blog-lazy-img.size-small { max-width: 360px; }
+        .blog-content .blog-lazy-img.size-medium { max-width: 600px; }
+        .blog-content .blog-lazy-img.size-large { max-width: 100%; }
+        .blog-content .blog-lazy-img.align-center { margin-left: auto; margin-right: auto; }
+        .blog-content .blog-lazy-img.align-left { float: left; margin-right: 28px; max-width: 50%; }
+        .blog-content .blog-lazy-img.align-right { float: right; margin-left: 28px; max-width: 50%; }
+        .blog-content .blog-lazy-img.align-full {
+          width: 100vw; max-width: 100vw;
+          margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+        }
+        .blog-content::after { content: ''; display: table; clear: both; }
         .blog-content blockquote {
           border-left: 3px solid var(--clay); margin: 2em 0;
           padding: 16px 24px; background: var(--cream-light);

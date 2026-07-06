@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 const WaIcon = ({ color = 'currentColor', size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color} style={{ flexShrink: 0 }}>
@@ -94,7 +95,6 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
         gap: 16,
       }}>
         <a onClick={() => go('home')} style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
-          <Logo size={36} />
           <Wordmark size="sm" oneline />
         </a>
 
@@ -169,7 +169,7 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
         </div>
       </div>
 
-      {mobileOpen && (
+      {mobileOpen && createPortal(
         <div className="mobile-drawer">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
             <Wordmark size="sm" oneline />
@@ -227,7 +227,8 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
               @swaswasthya
             </a>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );
@@ -383,6 +384,43 @@ export const ImgPh = ({ label, height = 320, radius = 'var(--radius-md)', style 
     <div className="imgph-label">▣ {label}</div>
   </div>
 );
+
+// Blur-up image: shows a tiny blurred placeholder instantly, crossfades to the
+// full-res image once it finishes loading. Pass `blurSrc` (a small data URI) to
+// enable it; falls back to a plain image when no placeholder is available.
+export const LazyImage = ({ src, blurSrc, alt = '', style = {}, imgStyle = {} }) => {
+  const [loaded, setLoaded] = React.useState(false);
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', ...style }}>
+      {blurSrc && (
+        <img
+          src={blurSrc}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover', filter: 'blur(18px)', transform: 'scale(1.15)',
+            opacity: loaded ? 0 : 1, transition: 'opacity 0.5s ease',
+          }}
+        />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        style={{
+          position: blurSrc ? 'relative' : 'static',
+          width: '100%', height: '100%', objectFit: 'cover',
+          opacity: blurSrc ? (loaded ? 1 : 0) : 1,
+          transition: 'opacity 0.5s ease',
+          ...imgStyle,
+        }}
+      />
+    </div>
+  );
+};
 
 export const SectionLabel = ({ num, children }) => (
   <div style={{
