@@ -63,7 +63,7 @@ export const PROGRAMS = [
       'Personalised diet (add-on)',
     ],
     equipment: ['Dumbbells', 'Resistance bands', 'Bricks, towels, props', 'Yoga mat', 'Own body weight'],
-    pricing: '₹ 15,000 / month',
+    pricing: 'From ₹ 10,000 / month',
     image: '/images/personal_training.jpg',
     imagery: 'tanvi correcting form · 1:1 setting',
   },

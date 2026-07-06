@@ -69,22 +69,22 @@ const Contact = ({ onEnquire }) => (
               alignItems: 'center',
               gap: 24,
               padding: '40px 44px',
-              background: '#25D366',
+              background: '#128C3F',
               borderRadius: 'var(--radius-md)',
               textDecoration: 'none',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(37,211,102,0.35)'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(18,140,63,0.4)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
           >
-            <div style={{ background: 'rgba(255,255,255,0.2)', borderRadius: '50%', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fff' }}>
+            <div style={{ background: 'rgba(255,255,255,0.16)', borderRadius: '50%', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fff' }}>
               <WaIcon size={32} />
             </div>
             <div>
-              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>Fastest response · WhatsApp</div>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.9)', marginBottom: 6 }}>Fastest response · WhatsApp</div>
               <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 28, color: '#fff' }}>+91 96371 42820</div>
             </div>
-            <div style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.85)' }}>
+            <div style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff' }}>
               Message now →
             </div>
           </a>

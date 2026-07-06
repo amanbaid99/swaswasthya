@@ -448,12 +448,12 @@ const ProgramsIndex = ({ setActiveId, onEnquire, setPage }) => {
             <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', maxWidth: 480 }}>
               Six programs. One integrated practice. Pick the one that meets you where you are — or build a combination with us.
             </p>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {filters.map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={f === filter ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm'}
+                  className={f === filter ? 'btn btn-primary' : 'btn btn-outline'}
                   style={{ textTransform: 'none', letterSpacing: '0.04em' }}
                 >
                   {f}

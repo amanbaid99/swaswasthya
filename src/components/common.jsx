@@ -64,7 +64,6 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'programs', label: 'Programs' },
-    { id: 'schedule', label: 'Schedule' },
     { id: 'blog', label: 'Journal' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -280,7 +279,6 @@ export const Footer = ({ setPage, onEnquire }) => (
             {[
               ['About', 'about'],
               ['Programs', 'programs'],
-              ['Schedule', 'schedule'],
               ['Contact', 'contact'],
             ].map(([label, id]) => (
               <a key={id} onClick={() => { setPage(id); window.scrollTo(0, 0); }}

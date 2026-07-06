@@ -4,7 +4,6 @@ import { Nav, Footer } from './components/common.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Programs from './pages/Programs.jsx';
-import Schedule from './pages/Schedule.jsx';
 import Contact from './pages/Contact.jsx';
 import Calculator from './pages/Calculator.jsx';
 import Admin from './pages/Admin.jsx';
@@ -53,7 +52,6 @@ function SiteInner() {
         <Route path="/" element={<Home setPage={navigatePage} onEnquire={onEnquire} onOpenProgram={openProgram} />} />
         <Route path="/about" element={<About setPage={navigatePage} onEnquire={onEnquire} />} />
         <Route path="/programs" element={<Programs activeId={activeProgramId} setActiveId={setActiveProgramId} onEnquire={onEnquire} setPage={navigatePage} />} />
-        <Route path="/schedule" element={<Schedule onEnquire={onEnquire} />} />
         <Route path="/contact" element={<Contact onEnquire={onEnquire} />} />
         <Route path="/calculator" element={<Calculator onEnquire={onEnquire} setPage={navigatePage} />} />
         <Route path="/blog" element={<Blog onEnquire={onEnquire} />} />

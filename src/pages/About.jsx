@@ -41,6 +41,49 @@ const About = ({ setPage, onEnquire }) => (
       </div>
     </section>
 
+    {/* Our Story */}
+    <section className="section">
+      <div className="container">
+        <div className="story-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: '1.1fr 1fr',
+          gap: 80,
+          alignItems: 'center',
+        }}>
+          <div>
+            <SectionLabel num="01">Our Story</SectionLabel>
+            <h2 className="display-2" style={{ marginBottom: 28 }}>
+              Started in a small room with <span className="italic" style={{ color: 'var(--clay)' }}>just four women</span>.
+            </h2>
+            <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 20, maxWidth: 540 }}>
+              Eighteen years ago, what began as a way to use time productively quietly grew into a practice — and then into a community of women of all ages working towards health and wellness.
+            </p>
+            <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', marginBottom: 32, maxWidth: 540 }}>
+              The journey has been long and filled with new ideas, techniques, teaching and continuous learning. Onwards and upwards.
+            </p>
+            <span className="tag">Tanvi · Founder & Coach</span>
+          </div>
+
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <img src="/images/our_story_3.JPG" alt="Tanvi — founder" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+              <img src="/images/our_story_2.JPG" alt="Community group session" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center bottom', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            </div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 48 }}>
+              <img src="/images/our_story_1.JPG" alt="Tanvi portrait" style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+              <img src="/images/our_story_4.JPG" alt="Practice today" style={{ width: '100%', height: 280, objectFit: 'cover', objectPosition: 'center center', borderRadius: 'var(--radius-md)', display: 'block', imageOrientation: 'from-image' }} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @container site (max-width: 900px) {
+          .story-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+      `}</style>
+    </section>
+
     {/* The why */}
     <section className="section">
       <div className="container">
@@ -50,7 +93,7 @@ const About = ({ setPage, onEnquire }) => (
           gap: 80,
         }}>
           <div>
-            <SectionLabel num="01">Philosophy</SectionLabel>
+            <SectionLabel num="02">Philosophy</SectionLabel>
             <h2 className="display-2">
               swa is <span className="italic" style={{ color: 'var(--clay)' }}>self</span>.<br/>
               swasthya is <span className="italic" style={{ color: 'var(--clay)' }}>health</span>.
@@ -80,7 +123,7 @@ const About = ({ setPage, onEnquire }) => (
     {/* Timeline */}
     <section className="section" style={{ background: 'var(--cream-light)', borderBlock: '1px solid var(--rule)' }}>
       <div className="container">
-        <SectionLabel num="02">The journey</SectionLabel>
+        <SectionLabel num="03">The journey</SectionLabel>
         <h2 className="display-2" style={{ marginBottom: 64, maxWidth: 720 }}>
           From a small room of four <span className="italic" style={{ color: 'var(--clay)' }}>to a movement</span>.
         </h2>
@@ -155,7 +198,7 @@ const About = ({ setPage, onEnquire }) => (
             style={{ width: '100%', height: 580, objectFit: 'cover', objectPosition: 'center top', borderRadius: 'var(--radius-lg)', display: 'block' }}
           />
           <div>
-            <SectionLabel num="03">Meet Tanvi</SectionLabel>
+            <SectionLabel num="04">Meet Tanvi</SectionLabel>
             <h2 className="display-2" style={{ marginBottom: 28 }}>
               The teacher behind <span className="italic" style={{ color: 'var(--clay)' }}>the practice</span>.
             </h2>
