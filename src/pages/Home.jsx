@@ -74,20 +74,22 @@ const HomeHero = ({ onEnquire, setPage }) => (
       {/* Programs info + CTAs row */}
       <div className="hero-bottom" style={{
         display: 'grid',
-        gridTemplateColumns: '1.6fr 1fr',
+        gridTemplateColumns: '1fr',
         gap: 20,
-        alignItems: 'stretch',
       }}>
 
-        {/* 6 programs card */}
+        {/* Combined card */}
         <div style={{
+          gridColumn: '1 / -1',
           padding: '28px 32px',
           border: '1px solid var(--rule)',
           borderRadius: 'var(--radius-md)',
           background: 'var(--cream-light)',
           display: 'flex',
-          flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'space-between',
+          gap: 32,
+          flexWrap: 'wrap',
         }}>
           <div>
             <div className="mono" style={{ color: 'var(--green-soft)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, marginBottom: 10 }}>
@@ -96,29 +98,24 @@ const HomeHero = ({ onEnquire, setPage }) => (
             <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 26, color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 14 }}>
               From everyday strength to face yog & prenatal care
             </div>
+            <button
+              onClick={() => setPage('programs')}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--green-deep)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 11,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                padding: 0,
+              }}
+            >
+              See all programs →
+            </button>
           </div>
-          <button
-            onClick={() => setPage('programs')}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--green-deep)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              padding: 0,
-              alignSelf: 'flex-start',
-            }}
-          >
-            See all programs →
-          </button>
-        </div>
-
-        {/* CTA */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <button className="btn btn-primary" onClick={onEnquire} style={{ width: '100%' }}>
+          <button className="btn btn-primary" onClick={onEnquire} style={{ flexShrink: 0 }}>
             Book a free intro session
           </button>
         </div>
