@@ -231,7 +231,7 @@ const BlogPost = ({ onEnquire }) => {
           font-style: italic; color: var(--ink-soft);
         }
         .blog-content hr { border: none; border-top: 1px solid var(--rule); margin: 2.5em 0; }
-        .blog-content a { color: var(--clay); text-decoration: underline; }
+        .blog-content a { color: #1a6bbf; text-decoration: underline; }
       `}</style>
 
       <HomeFinalCTA onEnquire={onEnquire} />
