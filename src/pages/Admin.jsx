@@ -98,7 +98,6 @@ const PostForm = ({ post, onSave, onCancel }) => {
   const [showImageModal, setShowImageModal] = React.useState(false);
   const [showCoverModal, setShowCoverModal] = React.useState(false);
   const [showCoverUrlInput, setShowCoverUrlInput] = React.useState(false);
-  const [showPreview, setShowPreview] = React.useState(false);
   const contentRef = React.useRef(null);
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
@@ -277,13 +276,7 @@ const PostForm = ({ post, onSave, onCancel }) => {
         <div style={fieldStyle}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
             <label style={{ ...S.label, marginBottom: 0 }}>Content</label>
-            <button
-              type="button"
-              onClick={() => setShowPreview((v) => !v)}
-              style={{ ...TOOLBAR_BTN, fontSize: 12, padding: '4px 12px', background: showPreview ? '#1a2e1a' : '#fff', color: showPreview ? '#f5f2ed' : '#1a2e1a' }}
-            >
-              {showPreview ? 'Hide preview' : 'Show preview'}
-            </button>
+            <span style={{ fontSize: 11, color: '#9a9a8a' }}>Live preview →</span>
           </div>
 
           {/* Toolbar */}
@@ -322,8 +315,8 @@ const PostForm = ({ post, onSave, onCancel }) => {
             ))}
           </div>
 
-          {/* Editor + optional live preview */}
-          <div style={{ display: 'grid', gridTemplateColumns: showPreview ? '1fr 1fr' : '1fr', gap: 12 }}>
+          {/* Editor + live preview */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <textarea
               ref={contentRef}
               style={{ ...S.input, height: 420, resize: 'vertical', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }}
@@ -332,40 +325,38 @@ const PostForm = ({ post, onSave, onCancel }) => {
               onKeyDown={handleKeyDown}
               placeholder="Write your post here...&#10;&#10;## Heading 2&#10;### Heading 3&#10;&#10;**Bold** (Ctrl+B)  *Italic* (Ctrl+I)&#10;&#10;[Link text](https://url.com)  (Ctrl+K)&#10;&#10;- Bullet point"
             />
-            {showPreview && (
-              <div style={{
-                height: 420,
-                overflow: 'auto',
-                padding: '16px 20px',
-                border: '1px solid #d4c9b5',
-                borderRadius: 8,
-                background: '#faf8f4',
-                fontSize: 15,
-                lineHeight: 1.75,
-                fontFamily: 'Georgia, serif',
-                color: '#1a2e1a',
-              }}>
-                <style>{`
-                  .admin-preview h1, .admin-preview h2, .admin-preview h3 { font-style: italic; margin: 1.4em 0 0.4em; line-height: 1.2; }
-                  .admin-preview h1 { font-size: 1.8em; }
-                  .admin-preview h2 { font-size: 1.4em; }
-                  .admin-preview h3 { font-size: 1.15em; }
-                  .admin-preview p { margin-bottom: 1em; }
-                  .admin-preview strong { font-weight: 700; }
-                  .admin-preview em { font-style: italic; }
-                  .admin-preview ul, .admin-preview ol { padding-left: 1.4em; margin-bottom: 1em; }
-                  .admin-preview li { margin-bottom: 0.3em; }
-                  .admin-preview a { color: #1a6bbf; text-decoration: underline; }
-                  .admin-preview blockquote { border-left: 3px solid #b87059; padding: 10px 16px; margin: 1em 0; color: #5a6e5a; font-style: italic; background: #f5f2ed; }
-                  .admin-preview img { max-width: 100%; border-radius: 6px; margin: 1em 0; }
-                  .admin-preview code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
-                `}</style>
-                <div
-                  className="admin-preview"
-                  dangerouslySetInnerHTML={{ __html: form.content ? marked(form.content) : '<p style="color:#9a9a8a;font-style:italic">Preview will appear here…</p>' }}
-                />
-              </div>
-            )}
+            <div style={{
+              height: 420,
+              overflow: 'auto',
+              padding: '16px 20px',
+              border: '1px solid #d4c9b5',
+              borderRadius: 8,
+              background: '#faf8f4',
+              fontSize: 15,
+              lineHeight: 1.75,
+              fontFamily: 'Georgia, serif',
+              color: '#1a2e1a',
+            }}>
+              <style>{`
+                .admin-preview h1, .admin-preview h2, .admin-preview h3 { font-style: italic; margin: 1.4em 0 0.4em; line-height: 1.2; }
+                .admin-preview h1 { font-size: 1.8em; }
+                .admin-preview h2 { font-size: 1.4em; }
+                .admin-preview h3 { font-size: 1.15em; }
+                .admin-preview p { margin-bottom: 1em; }
+                .admin-preview strong { font-weight: 700; }
+                .admin-preview em { font-style: italic; }
+                .admin-preview ul, .admin-preview ol { padding-left: 1.4em; margin-bottom: 1em; }
+                .admin-preview li { margin-bottom: 0.3em; }
+                .admin-preview a { color: #1a6bbf; text-decoration: underline; }
+                .admin-preview blockquote { border-left: 3px solid #b87059; padding: 10px 16px; margin: 1em 0; color: #5a6e5a; font-style: italic; background: #f5f2ed; }
+                .admin-preview img { max-width: 100%; border-radius: 6px; margin: 1em 0; }
+                .admin-preview code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+              `}</style>
+              <div
+                className="admin-preview"
+                dangerouslySetInnerHTML={{ __html: form.content ? marked(form.content) : '<p style="color:#9a9a8a;font-style:italic">Preview will appear here…</p>' }}
+              />
+            </div>
           </div>
           <div style={{ fontSize: 11, color: '#9a9a8a', marginTop: 4 }}>
             Ctrl+B bold · Ctrl+I italic · Ctrl+K link · H2/H3 buttons toggle on/off
