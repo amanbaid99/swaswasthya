@@ -86,6 +86,7 @@ const PostForm = ({ post, onSave, onCancel }) => {
   const [form, setForm] = React.useState({
     title: post?.title || '',
     slug: post?.slug || '',
+    author: post?.author || '',
     category: post?.category || CATEGORIES[0],
     excerpt: post?.excerpt || '',
     content: post?.content || '',
@@ -231,6 +232,13 @@ const PostForm = ({ post, onSave, onCancel }) => {
           <div style={fieldStyle}>
             <label style={S.label}>Slug *</label>
             <input style={S.input} value={form.slug} onChange={(e) => set('slug', e.target.value)} required />
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div style={fieldStyle}>
+            <label style={S.label}>Author *</label>
+            <input style={S.input} value={form.author} onChange={(e) => set('author', e.target.value)} required placeholder="e.g. Tanvi" />
           </div>
         </div>
 
