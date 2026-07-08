@@ -146,9 +146,15 @@ const BlogPost = ({ onEnquire }) => {
             <span className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-soft)' }}>{fmtDate(post.published_at)}</span>
           </div>
 
-          <h1 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 'clamp(32px, 5cqw, 64px)', color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 24 }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 'clamp(32px, 5cqw, 64px)', color: 'var(--green-deep)', lineHeight: 1.2, marginBottom: 20 }}>
             {post.title}
           </h1>
+
+          {post.author && (
+            <div className="mono" style={{ fontSize: 11, letterSpacing: '0.12em', color: 'var(--ink-soft)', marginBottom: 24 }}>
+              By {post.author}
+            </div>
+          )}
 
           {post.excerpt && (
             <p style={{ fontSize: 20, lineHeight: 1.6, color: 'var(--ink-soft)', fontFamily: 'var(--font-display)', fontStyle: 'italic', marginBottom: 40, borderBottom: '1px solid var(--rule)', paddingBottom: 40 }}>
