@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { SectionLabel, HomeFinalCTA } from '../components/common.jsx';
 
 const WA_URL = 'https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs.';
@@ -9,11 +10,12 @@ const WaIcon = ({ size = 20 }) => (
   </svg>
 );
 
-const ContactItem = ({ label, value, href, primary }) => (
+const ContactItem = ({ label, value, href, primary, onClick }) => (
   <a
     href={href}
     target={href?.startsWith('http') ? '_blank' : undefined}
     rel="noreferrer"
+    onClick={onClick}
     style={{
       display: 'flex',
       flexDirection: 'column',
@@ -76,6 +78,7 @@ const Contact = ({ onEnquire }) => (
             }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(18,140,63,0.4)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+            onClick={() => posthog.capture('contact_channel_clicked', { channel: 'whatsapp' })}
           >
             <div style={{ background: 'rgba(255,255,255,0.16)', borderRadius: '50%', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#fff' }}>
               <WaIcon size={32} />
@@ -89,9 +92,9 @@ const Contact = ({ onEnquire }) => (
             </div>
           </a>
 
-          <ContactItem label="Call us" value="+91 99230 86478" href="tel:9923086478" />
-          <ContactItem label="Email" value="swaswasthya@gmail.com" href="mailto:swaswasthya@gmail.com" />
-          <ContactItem label="Instagram" value="@swaswasthya" href="https://instagram.com/swaswasthya" />
+          <ContactItem label="Call us" value="+91 99230 86478" href="tel:9923086478" onClick={() => posthog.capture('contact_channel_clicked', { channel: 'phone' })} />
+          <ContactItem label="Email" value="swaswasthya@gmail.com" href="mailto:swaswasthya@gmail.com" onClick={() => posthog.capture('contact_channel_clicked', { channel: 'email' })} />
+          <ContactItem label="Instagram" value="@swaswasthya" href="https://instagram.com/swaswasthya" onClick={() => posthog.capture('contact_channel_clicked', { channel: 'instagram' })} />
         </div>
       </div>
 

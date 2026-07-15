@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { createPortal } from 'react-dom';
 
 const WaIcon = ({ color = 'currentColor', size = 16 }) => (
@@ -137,7 +138,7 @@ export const Nav = ({ page, setPage, onEnquire, isDark, toggleDark }) => {
           <a href="tel:9923086478" className="btn btn-ghost btn-sm nav-phone" style={{ display: 'inline-flex' }}>
             ☎ 99230 86478
           </a>
-          <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
+          <a href="https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs." target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }} onClick={() => posthog.capture('nav_whatsapp_clicked')}>
             <WaIcon /> WhatsApp
           </a>
           <button
@@ -501,14 +502,14 @@ export const HomeFinalCTA = ({ onEnquire }) => (
           alignItems: 'center',
           gap: 8,
           textDecoration: 'none',
-        }}>
+        }} onClick={() => posthog.capture('footer_enquiry_clicked', { channel: 'whatsapp' })}>
           <WaIcon color="var(--green-deep)" /> WhatsApp Tanvi
         </a>
         <a href="mailto:swaswasthya@gmail.com" className="btn btn-outline" style={{
           borderColor: 'var(--cream)',
           color: 'var(--cream)',
           textDecoration: 'none',
-        }}>
+        }} onClick={() => posthog.capture('footer_enquiry_clicked', { channel: 'email' })}>
           Email us
         </a>
       </div>
