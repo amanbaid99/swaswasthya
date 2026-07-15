@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { marked } from 'marked';
 import { supabase } from '../lib/supabase.js';
 import ImageEditorModal from '../components/ImageEditorModal.jsx';
@@ -49,6 +50,8 @@ const Login = ({ onLogin }) => {
     const { data, error: err } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (err) { setError(err.message); return; }
+    posthog.identify(data.session.user.id, { role: 'admin' });
+    posthog.capture('admin_signed_in');
     onLogin(data.session);
   };
 
@@ -487,6 +490,8 @@ const Admin = () => {
   }, [session, fetchPosts]);
 
   const logout = async () => {
+    posthog.capture('admin_signed_out');
+    posthog.reset();
     await supabase.auth.signOut();
     setSession(null);
   };

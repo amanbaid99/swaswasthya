@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { SectionLabel, HomeFinalCTA } from '../components/common.jsx';
 import { PROGRAMS } from '../data/programs.js';
 
@@ -299,6 +300,8 @@ const Calculator = ({ onEnquire, setPage }) => {
 
     const protein = calcProtein(w, form.activity, form.goal);
 
+    const suggestedIds = suggestedPrograms(form.goal, bmi);
+
     setResults({
       dailyCal,
       bmr: Math.round(bmr),
@@ -308,7 +311,15 @@ const Calculator = ({ onEnquire, setPage }) => {
       idealHi: hi,
       currentWeight: w,
       protein,
-      suggestedIds: suggestedPrograms(form.goal, bmi),
+      suggestedIds,
+    });
+
+    posthog.capture('calculator_completed', {
+      goal: form.goal,
+      activity: form.activity,
+      gender: form.gender,
+      bmi_category: bmiCat.label,
+      suggested_programs: suggestedIds,
     });
 
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
@@ -891,7 +902,7 @@ const Calculator = ({ onEnquire, setPage }) => {
                       </div>
                       <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)' }}>{p.short}</p>
                       <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                        <button onClick={onEnquire} className="btn btn-primary btn-sm">Enquire →</button>
+                        <button onClick={() => { posthog.capture('calculator_enquiry_clicked', { program_id: id, program_name: p.name }); onEnquire(); }} className="btn btn-primary btn-sm">Enquire →</button>
                         <span className="mono" style={{ fontSize: 10, color: 'var(--clay)', letterSpacing: '0.1em', display: 'flex', alignItems: 'center' }}>{p.pricing}</span>
                       </div>
                     </div>

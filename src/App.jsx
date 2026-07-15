@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { BrowserRouter, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Nav, Footer } from './components/common.jsx';
 import Home from './pages/Home.jsx';
@@ -10,7 +11,11 @@ import Admin from './pages/Admin.jsx';
 import Blog from './pages/Blog.jsx';
 
 const WA_URL = 'https://wa.me/919637142820?text=Hi%20Tanvi%2C%20I%27d%20like%20to%20enquire%20about%20your%20programs.';
-const onEnquire = () => window.open(WA_URL, '_blank');
+const openWhatsApp = () => window.open(WA_URL, '_blank');
+const onEnquire = (source) => {
+  posthog.capture('enquiry_initiated', { source: typeof source === 'string' ? source : 'home_hero' });
+  openWhatsApp();
+};
 
 function SiteInner() {
   const navigate = useNavigate();

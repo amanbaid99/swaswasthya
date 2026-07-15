@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { marked } from 'marked';
 import { supabase } from '../lib/supabase.js';
@@ -105,7 +106,13 @@ const BlogPost = ({ onEnquire }) => {
       .eq('slug', slug)
       .eq('published', true)
       .single()
-      .then(({ data }) => { setPost(data); setLoading(false); });
+      .then(({ data }) => {
+        setPost(data);
+        setLoading(false);
+        if (data) {
+          posthog.capture('blog_post_viewed', { slug: data.slug, title: data.title, category: data.category });
+        }
+      });
   }, [slug]);
 
   // Blur-up for images embedded in the post body: each is wrapped in a

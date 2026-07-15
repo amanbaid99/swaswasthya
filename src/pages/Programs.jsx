@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { PROGRAMS } from '../data/programs.js';
 import { ImgPh, SectionLabel, HomeFinalCTA } from '../components/common.jsx';
@@ -100,6 +101,16 @@ const ProgramRow = ({ p, index, onOpen }) => {
 
 const ProgramDetail = ({ p, onEnquire }) => {
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    posthog.capture('program_viewed', { program_id: p.id, program_name: p.name, format: p.format });
+  }, [p.id]);
+
+  const handleEnquire = () => {
+    posthog.capture('program_enquiry_clicked', { program_id: p.id, program_name: p.name, format: p.format });
+    onEnquire();
+  };
+
   return (
   <main>
     <section style={{ padding: '40px 0 32px' }}>
@@ -133,7 +144,7 @@ const ProgramDetail = ({ p, onEnquire }) => {
               {p.short}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <button className="btn btn-primary" onClick={onEnquire}>
+              <button className="btn btn-primary" onClick={handleEnquire}>
                 Enquire about {p.name}
               </button>
               <a href="https://wa.me/919923086478" className="btn btn-outline">
@@ -348,7 +359,7 @@ const ProgramDetail = ({ p, onEnquire }) => {
               Pricing varies by frequency, format and personalisation. Send us an enquiry and we'll send back a detailed plan within 24 hours.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <button className="btn btn-primary" onClick={onEnquire} style={{
+              <button className="btn btn-primary" onClick={handleEnquire} style={{
                 background: 'var(--cream)',
                 color: 'var(--green-deep)',
                 borderColor: 'var(--cream)',
@@ -457,7 +468,10 @@ const ProgramsIndex = ({ onEnquire, setPage }) => {
               {filters.map((f) => (
                 <button
                   key={f}
-                  onClick={() => setFilter(f)}
+                  onClick={() => {
+                    setFilter(f);
+                    if (f !== filter) posthog.capture('programs_filter_changed', { filter: f });
+                  }}
                   className={f === filter ? 'btn btn-primary' : 'btn btn-outline'}
                   style={{ textTransform: 'none', letterSpacing: '0.04em' }}
                 >
